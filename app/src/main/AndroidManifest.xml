@@ -55,5 +55,5 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBAQAZBx9_BEs8YLT-Z77yh0qVQGsknPLM" />
     </application>
-  
+
 </manifest>
