@@ -7,6 +7,14 @@ public class Global   {
     private static Global instance ;
     private String user ;
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
     private Global() {}
 
     public static Global getInstance() {

@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
     private View mLoginFormView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -207,16 +206,11 @@ public class LoginActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 return false;
             }
-         /*   for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mUser)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-*/
-          if (contraseñaBase.compareTo(mPassword) == 0)
-                return true;
+
+          if (contraseñaBase.compareTo(mPassword) == 0) {
+                Global.getInstance().setUser(mUser);
+              return true;
+          }
             else
                 return false;
 
@@ -255,14 +249,12 @@ public class LoginActivity extends AppCompatActivity {
                 while (resultSet.next()) {
 
                     lista.add(resultSet.getString("name"));
-                    Log.d("user", resultSet.getString("name"));
-
 
                 }
             }
         } catch (Exception ex) {
 //aca me falta capturar la excpcion
-            //no comitea
+
 
         }
         return lista;
