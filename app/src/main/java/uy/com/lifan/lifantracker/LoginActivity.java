@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,8 +29,6 @@ import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
 
 public class LoginActivity extends AppCompatActivity {
-
-
 
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "USREFFA0000:renato", "USREFFA0003:renato"
@@ -52,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         mUserView = (AutoCompleteTextView) findViewById(R.id.usuario);
 
         mPasswordView = (EditText) findViewById(R.id.password);
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+
 
         Button mSignInButton = (Button) findViewById(R.id.user_sign_in_button);
         mSignInButton.setOnClickListener(new OnClickListener() {
@@ -77,12 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
