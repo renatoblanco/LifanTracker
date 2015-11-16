@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
 import java.sql.ResultSet;
@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
+import uy.com.lifan.lifantracker.barcodereader.BarcodeCaptureActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -41,6 +42,11 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    //barcode references
+    private String barcodeValue;
+    private static final int RC_BARCODE_CAPTURE = 9001;
+    private static final String TAG = "BarcodeMain";
 
 
     @Override
@@ -75,7 +81,50 @@ public class LoginActivity extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
+        Button cameraButton = (Button) findViewById(R.id.button);
+        cameraButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent intent = new Intent(LoginActivity.this, BarcodeCaptureActivity.class);
+                intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
+                intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
+
+                startActivityForResult(intent, RC_BARCODE_CAPTURE);
+            }
+        });
+
+        Intent intent = new Intent(LoginActivity.this, BarcodeCaptureActivity.class);
+        intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
+        intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
+
+        startActivityForResult(intent, RC_BARCODE_CAPTURE);
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RC_BARCODE_CAPTURE) {
+            if (resultCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
+                    //    statusMessage.setText(R.string.barcode_success);
+
+                    barcodeValue = barcode.displayValue;
+                    mUserView.setText(barcode.displayValue);
+
+                    //  Log.d(TAG, "Barcode read: " + barcode.displayValue);
+                } else {
+
+                    Log.d(TAG, "No barcode captured, intent data is null");
+                }
+            } else {
+                Log.d(TAG, "No barcode captured, intent data is null");
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void attemptLogin() {
@@ -135,7 +184,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isPasswordValid(String password) {
-
         return password.length() == 4;
     }
 
@@ -183,12 +231,12 @@ public class LoginActivity extends AppCompatActivity {
 
         private final String mUser;
         private final String mPassword;
-        String contraseñaBase="";
+        String contraseniaBase = "";
 
         UserLoginTask(String usuario, String password) {
             mUser = usuario;
             mPassword = password;
-             contraseñaBase  = password();
+            contraseniaBase = password();
         }
 
 
@@ -202,16 +250,13 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
 
-          if (contraseñaBase.compareTo(mPassword) == 0) {
+            if (contraseniaBase.compareTo(mPassword) == 0) {
                 Global.getInstance().setUser(mUser);
-              return true;
-          }
-            else
+                return true;
+            } else
                 return false;
 
-
         }
-
 
         @Override
         protected void onPostExecute(final Boolean success) {
@@ -239,7 +284,7 @@ public class LoginActivity extends AppCompatActivity {
         DB db = new DB();//base
         ArrayList<String> lista = new ArrayList<>();
         try {
-            ResultSet resultSet = db.select(Querys.USUARIOS_ACTIVOS);
+            ResultSet resultSet = db.select(Querys.QRY_USUARIOS_ACTIVOS);
             if (resultSet != null) {
                 while (resultSet.next()) {
 
