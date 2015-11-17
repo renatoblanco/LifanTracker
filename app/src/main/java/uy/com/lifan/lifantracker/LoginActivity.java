@@ -95,12 +95,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-     /*   Intent intent = new Intent(LoginActivity.this, BarcodeCaptureActivity.class);
-        intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
-        intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
-
-        startActivityForResult(intent, RC_BARCODE_CAPTURE);
-*/
     }
 
 
@@ -242,15 +236,16 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
             }
-
-            if (contraseniaBase.compareTo(mPassword) == 0) {
+            if (contraseniaBase == null)
+                return false;
+            else if (contraseniaBase.compareTo(mPassword) == 0) {
                 Global.getInstance().setUser(mUser);
                 return true;
             } else
@@ -310,9 +305,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if (resultSet != null) {
                 while (resultSet.next()) {
-
                     password = resultSet.getString(1);
-
                 }
             }
         } catch (Exception ex) {
