@@ -17,6 +17,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -81,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        Button cameraButton = (Button) findViewById(R.id.button);
+        ImageButton cameraButton = (ImageButton) findViewById(R.id.button);
         cameraButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,12 +95,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = new Intent(LoginActivity.this, BarcodeCaptureActivity.class);
+     /*   Intent intent = new Intent(LoginActivity.this, BarcodeCaptureActivity.class);
         intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
         intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
 
         startActivityForResult(intent, RC_BARCODE_CAPTURE);
-
+*/
     }
 
 
@@ -113,7 +114,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     barcodeValue = barcode.displayValue;
                     mUserView.setText(barcode.displayValue);
-
                     //  Log.d(TAG, "Barcode read: " + barcode.displayValue);
                 } else {
 
