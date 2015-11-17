@@ -3,7 +3,7 @@ package uy.com.lifan.lifantracker;
 public class Global   {
 
     //Clase que agrupa todas las variables globales de la app.
-//prueba claudia22
+//gjghjhghj
     private static Global instance ;
     private String user ;
 
