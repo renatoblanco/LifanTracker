@@ -50,7 +50,7 @@ public class DB extends _Default implements Runnable {
 
         if (this.conn==null){
             Context context = getApplicationContext();
-            CharSequence text = "Hello toast!";
+            CharSequence text = "Hello !";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);

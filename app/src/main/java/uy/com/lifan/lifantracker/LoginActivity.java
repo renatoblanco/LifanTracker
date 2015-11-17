@@ -70,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         Button mSignInButton = (Button) findViewById(R.id.user_sign_in_button);
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -309,8 +308,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         } catch (Exception ex) {
-//aca me falta capturar la excpcion
-            //no comitea
+            //aca me falta capturar la excpcion
+
 
         }
         return password;
