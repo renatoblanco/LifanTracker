@@ -6,7 +6,6 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +25,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
     //barcode references
     private String barcodeValue;
     private static final int RC_BARCODE_CAPTURE = 9001;
-    private static final String TAG = "BarcodeMain";
+    private static final String LOG_TAG = "Scan VIN";
     boolean isGPSEnabled = false;
     boolean errorLocation = false;
 
@@ -91,10 +90,10 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
 
                 } else {
 
-                    Log.d(TAG, "No barcode captured, intent data is null");
+                    Log.d(LOG_TAG, "No barcode captured, intent data is null");
                 }
             } else {
-                Log.d(TAG, "No barcode captured, intent data is null");
+                Log.d(LOG_TAG, "No barcode captured, intent data is null");
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
