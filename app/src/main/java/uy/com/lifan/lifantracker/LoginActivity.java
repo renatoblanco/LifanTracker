@@ -103,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-                    //    statusMessage.setText(R.string.barcode_success);
 
                     barcodeValue = barcode.displayValue;
                     mUserView.setText(barcode.displayValue);
@@ -259,7 +258,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if (success) {
                 Intent intent =
-                        new Intent(LoginActivity.this, MapsActivity.class);
+                        new Intent(LoginActivity.this, ScanActivity.class);
                 startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -290,6 +289,9 @@ public class LoginActivity extends AppCompatActivity {
 //aca me falta capturar la excpcion
 
 
+        } finally {
+
+            
         }
         return lista;
 

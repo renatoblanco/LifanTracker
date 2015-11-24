@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 public class DB extends _Default implements Runnable {
 
     private Connection conn;
-    private String host = "192.168.2.72";
+    private String host = "192.168.2.2";
     private String db = "adempiere";
     private int port = 5432;
     private String user = "adempiere";

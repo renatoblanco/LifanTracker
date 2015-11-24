@@ -8,7 +8,7 @@
     <string name="nombre">Ingresar</string>
     <string name="title_activity_maps">Map</string>
     <string name="prompt_email">Usuario</string>
-    <string name="prompt_password">Contraseña</string>
+    <string name="prompt_password">PIN</string>
     <string name="action_sign_in">Ingreso</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_user">Usuario incorrecto</string>
@@ -31,4 +31,5 @@
     <string name="barcode_failure">No se capturo ningún codigo</string>
     <string name="barcode_error">"Error reading barcode: %1$s"</string>
     <string name="title_activity_scan">ScanActivity</string>
+    <string name="title_activity_scanctivity">Scanctivity</string>
 </resources>

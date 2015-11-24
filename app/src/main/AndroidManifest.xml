@@ -11,12 +11,16 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <permission
         android:name="com.expocodetech.android.maps.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="com.expocodetech.android.maps.permission.MAPS_RECEIVE" />
+
     <uses-library android:name="com.google.android.maps" />
 
     <application
@@ -27,18 +31,14 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_login"></activity>
+            android:label="@string/app_login" />
         <activity
             android:name=".MapsActivity"
             android:label="@string/app_name"></activity>
+
         <activity
             android:name=".SplashScreenActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -52,9 +52,17 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
+
         <activity
             android:name=".barcodereader.BarcodeCaptureActivity"
-            android:label="Read Barcode" />
+            android:label="Read Barcode"></activity>
+
+        <activity android:name=".ScanActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

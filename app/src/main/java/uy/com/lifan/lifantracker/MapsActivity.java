@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -49,10 +50,20 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
             @Override
             public void onClick(View v) {
 
-
                 LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                Criteria criteria = new Criteria();
+                criteria.setAccuracy(Criteria.ACCURACY_FINE);
+                String bestProvider = locationManager.getBestProvider(criteria, false);
+                Location location = locationManager.getLastKnownLocation(bestProvider);
+
+                if (location == null)
+                    Snackbar.make(v, "location null", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                else
+                    Snackbar.make(v, "Vehículo posicionado", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
 
                 LatLng Pos = new LatLng(location.getLatitude(), location.getLongitude());
                // Double rotacion = GetOrientacion();
@@ -60,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
                 try {
 
                     DB db = new DB();
-                    String insert = String.format(Querys.INSERT_LOCATION, "9UK64ED78C77238", location.getLatitude(), location.getLongitude());
+                    String insert = String.format(Querys.INRT_LOCATION, "9UK64ED78C77238", location.getLatitude(), location.getLongitude());
                     db.execute(insert);
 
                 } catch (Exception ex) {
