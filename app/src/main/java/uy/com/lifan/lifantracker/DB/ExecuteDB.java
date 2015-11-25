@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 /**
  * Created by Renato Blanco on  31/08/2015
  */
- 
-public class ExecuteDB extends AsyncTask<String,Void,ResultSet> {
+
+public class ExecuteDB extends AsyncTask<String, Void, ResultSet> {
 
     private Connection connection;
     private String query;
@@ -22,14 +22,14 @@ public class ExecuteDB extends AsyncTask<String,Void,ResultSet> {
     @Override
     protected ResultSet doInBackground(String... params) {
         ResultSet resultSet = null;
-        try{
+        try {
             resultSet = connection.prepareStatement(query).executeQuery();
-        }catch (Exception e){
+        } catch (Exception e) {
 
-        }finally {
+        } finally {
             try {
                 connection.close();
-            }catch (Exception ex){
+            } catch (Exception ex) {
 
             }
         }

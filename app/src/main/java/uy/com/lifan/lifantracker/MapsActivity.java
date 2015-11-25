@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.sql.ResultSet;
+import java.util.Date;
 
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
@@ -44,7 +46,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         setUpMapIfNeeded();
 
 
-        Button Btnposicionar = (Button)findViewById(R.id.Btnposicionar);
+        Button Btnposicionar = (Button) findViewById(R.id.Btnposicionar);
 
         Btnposicionar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,20 +55,26 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
                 LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
                 Criteria criteria = new Criteria();
-                criteria.setAccuracy(Criteria.ACCURACY_FINE);
+                //criteria.setAccuracy(Criteria.ACCURACY_FINE);
                 String bestProvider = locationManager.getBestProvider(criteria, false);
                 Location location = locationManager.getLastKnownLocation(bestProvider);
+                Long time = location.getTime();
+                Date d = new Date(time);
+
+                Log.d("", time.toString());
+
+                Log.d("Location", "MAPS" + location.getLatitude() + "" + +location.getLongitude());
 
                 if (location == null)
                     Snackbar.make(v, "location null", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 else
-                    Snackbar.make(v, "Vehículo posicionado", Snackbar.LENGTH_LONG)
+                    Snackbar.make(v, d.toString(), Snackbar.LENGTH_INDEFINITE)
                             .setAction("Action", null).show();
 
 
                 LatLng Pos = new LatLng(location.getLatitude(), location.getLongitude());
-               // Double rotacion = GetOrientacion();
+                // Double rotacion = GetOrientacion();
 
                 try {
 
@@ -149,15 +157,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setCompassEnabled(true);
 
-        LatLng LIFAN  = new LatLng(-34.707616, -56.503064);
-        Marker lifan1 ;
+        LatLng LIFAN = new LatLng(-34.707616, -56.503064);
+        Marker lifan1;
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(LIFAN)      // Sets the center of the map to Mountain View
                 .zoom(17)                   // Sets the zoom
                 .bearing(90)                // Sets the orientation of the camera to east
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
-
 
 
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
@@ -167,20 +174,20 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         DB db = new DB();
         try {
             ResultSet resultSet = db.select(Querys.QRY_LOCATIONS);
-            if (resultSet != null){
-                while (resultSet.next()){
-                     LIFAN  = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
-                     lifan1 = mMap.addMarker(new MarkerOptions()
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    LIFAN = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
+                    lifan1 = mMap.addMarker(new MarkerOptions()
                             .position(LIFAN)
                             .title("1-Lifan Motors Uruguay")
-                            .snippet(LIFAN.latitude +""+ LIFAN.longitude).position(LIFAN).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3)));
+                            .snippet(LIFAN.latitude + "" + LIFAN.longitude).position(LIFAN).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3)));
                     lifan1.setRotation(210);
                     mMap.addMarker(new MarkerOptions()
                             .position(lifan1.getPosition()));
 
                 }
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
 
         }
 
@@ -204,11 +211,11 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
     }
 
 
-    public Double GetOrientacion(){
+    public Double GetOrientacion() {
 
         String servicio = Context.SENSOR_SERVICE;
         SensorManager sensorManager =
-                (SensorManager)getSystemService(servicio);
+                (SensorManager) getSystemService(servicio);
 
         Sensor sensorAcelerometro = sensorManager
                 .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -235,16 +242,16 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         sensorManager.getOrientation(R, values);
 
 
-    return Math.toDegrees(values[0]);
+        return Math.toDegrees(values[0]);
     }
 
     class ListenerSensor implements SensorEventListener {
 
         public void onSensorChanged(SensorEvent sensorEvent) {
-            if (valuesAcelerometro[0]<1)
-             valuesAcelerometro = sensorEvent.values;
-            else if (valuesBrujula[0]<1)
-             valuesBrujula = sensorEvent.values;
+            if (valuesAcelerometro[0] < 1)
+                valuesAcelerometro = sensorEvent.values;
+            else if (valuesBrujula[0] < 1)
+                valuesBrujula = sensorEvent.values;
 
         }
 

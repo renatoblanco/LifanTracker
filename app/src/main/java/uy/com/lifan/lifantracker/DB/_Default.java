@@ -9,7 +9,7 @@ public class _Default extends AppCompatActivity {
     protected String _mensagem;
     protected boolean _status;
 
-    public _Default(){
+    public _Default() {
         this._status = true;
         this._mensagem = "";
     }

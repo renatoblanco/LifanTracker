@@ -2,19 +2,21 @@ package uy.com.lifan.lifantracker;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.vision.barcode.Barcode;
+
+import java.util.Date;
 
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
@@ -28,15 +30,38 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
     private static final String LOG_TAG = "Scan VIN";
     boolean isGPSEnabled = false;
     boolean errorLocation = false;
+    float accuracy = 0;
 
+    //Geolocation referentes
+    private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
+    // The minimum time between updates in milliseconds
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    LocationManager locationManager;
+    Location actualLocation;
+    LocatorListener locationlistener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+        locationlistener = new LocatorListener();
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
+        locationlistener.actualLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
 
         ImageButton cameraButton = (ImageButton) findViewById(R.id.button);
+        Button manualButton = (Button) findViewById(R.id.manual);
 
+        manualButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,25 +88,20 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-
                     barcodeValue = barcode.displayValue;
 
-                    LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-                    Criteria criteria = new Criteria();
-                    criteria.setAccuracy(Criteria.ACCURACY_FINE);
-                    String bestProvider = locationManager.getBestProvider(criteria, false);
-                    Location location = locationManager.getLastKnownLocation(bestProvider);
+                    Location location = locationlistener.actualLocation;
+                    Long time = location.getTime();
+                    Date d = new Date(time);
 
 
                     LatLng Pos = new LatLng(location.getLatitude(), location.getLongitude());
-
+                    Log.d("Location", time.toString() + " " + location.getLatitude() + "" + +location.getLongitude());
                     try {
 
                         DB db = new DB();
                         String insert = String.format(Querys.INRT_LOCATION, barcodeValue, location.getLatitude(), location.getLongitude());
                         db.execute(insert);
-
 
                     } catch (Exception ex) {
 
@@ -98,11 +118,22 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-
     }
 
     public void onLocationChanged(Location location) {
         // Se ha encontrado una nueva localización
-
+        Log.d("Location", "on location change Scan" + location.getTime() + " " + location.getLatitude() + "  " + +location.getLongitude());
+        actualLocation = location;
     }
+
+    public void onProviderEnabled(String provider) {
+    }
+
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    public void onProviderDisabled(String provider) {
+    }
+
+
 }
