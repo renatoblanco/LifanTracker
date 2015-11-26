@@ -34,10 +34,9 @@ import uy.com.lifan.lifantracker.DB.Querys;
 
 public class MapsActivity extends FragmentActivity implements LocationListener {
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     float[] valuesAcelerometro = new float[3];
     float[] valuesBrujula = new float[3];
-
+    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

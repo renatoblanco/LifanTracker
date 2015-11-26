@@ -2,6 +2,7 @@ package uy.com.lifan.lifantracker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -27,21 +28,20 @@ import uy.com.lifan.lifantracker.barcodereader.BarcodeCaptureActivity;
 
 public class ScanActivity extends AppCompatActivity implements LocationListener {
 
-    //barcode references
-    private String barcodeValue;
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String LOG_TAG = "Scan VIN";
-    boolean isGPSEnabled = false;
-    boolean errorLocation = false;
-    float accuracy = 0;
-
     //Geolocation referentes
     private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
     // The minimum time between updates in milliseconds
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    boolean isGPSEnabled = false;
+    boolean errorLocation = false;
+    float accuracy = 0;
     LocationManager locationManager;
     Location actualLocation;
     LocatorListener locationlistener;
+    //barcode references
+    private String barcodeValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +59,8 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onClick(View view) {
 
-                //Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -97,14 +97,15 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                     if ((barcodeValue.length() >= 17) && (validateVIN.isValid(barcodeValue.substring(0, 17)))) {
 
                         Location location = locationlistener.actualLocation;
-                        Long time = location.getTime();
-                        Date d = new Date(time);
+                        Date d = new Date(location.getTime());
+                        java.sql.Timestamp sq = new java.sql.Timestamp(d.getTime());
+
                         LatLng Pos = new LatLng(location.getLatitude(), location.getLongitude());
-                        Log.d("Location", time.toString() + " " + location.getLatitude() + "" + +location.getLongitude());
+                        Log.d("Location", d.toString() + " " + location.getLatitude() + "" + +location.getLongitude());
                         try {
 
                             DB db = new DB();
-                            String insert = String.format(Querys.INRT_LOCATION, barcodeValue.substring(0, 17), location.getLatitude(), location.getLongitude());
+                            String insert = String.format(Querys.INRT_LOCATION, barcodeValue.substring(0, 17), location.getLatitude(), location.getLongitude(), sq);
                             db.execute(insert);
 
 
@@ -117,9 +118,8 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
 
                         }
                     } else {
-
                         Snackbar.make(layout, "El VIN no es Valido, reintente", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                                .setAction("Action", null).setActionTextColor(Color.RED).show();
                         errorLocation = false;
 
                     }

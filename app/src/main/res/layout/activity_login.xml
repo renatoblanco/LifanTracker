@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_login_layout"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_login_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -34,11 +34,11 @@
 
             <ImageButton
                 android:id="@+id/button"
-                android:src="@drawable/qr_70"
                 android:layout_width="77dp"
                 android:layout_height="74dp"
                 android:layout_gravity="center_horizontal"
-                android:clickable="false" />
+                android:clickable="false"
+                android:src="@drawable/qr_70" />
 
 
             <AutoCompleteTextView

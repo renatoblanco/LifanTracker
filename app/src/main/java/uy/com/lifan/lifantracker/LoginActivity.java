@@ -35,20 +35,16 @@ public class LoginActivity extends AppCompatActivity {
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "USREFFA0000:renato", "USREFFA0003:renato"
     };
-
+    private static final int RC_BARCODE_CAPTURE = 9001;
+    private static final String TAG = "BarcodeMain";
     private UserLoginTask mAuthTask = null;
-
     // UI references.
     private AutoCompleteTextView mUserView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
     //barcode references
     private String barcodeValue;
-    private static final int RC_BARCODE_CAPTURE = 9001;
-    private static final String TAG = "BarcodeMain";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +211,51 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public ArrayList<String> getLista() {
+        DB db = new DB();//base
+        ArrayList<String> lista = new ArrayList<>();
+        try {
+            ResultSet resultSet = db.select(Querys.QRY_USUARIOS_ACTIVOS);
+            if (resultSet != null) {
+                while (resultSet.next()) {
+
+                    lista.add(resultSet.getString("name"));
+
+                }
+            }
+        } catch (Exception ex) {
+//aca me falta capturar la excpcion
+
+
+        } finally {
+
+
+        }
+        return lista;
+
+    }
+
+    public String password() {
+        DB db = new DB();//base
+        String password = "";
+        try {
+            String comando = String.format(Querys.QRY_USUARIO, mUserView.getText());
+            ResultSet resultSet = db.select(comando);
+
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    password = resultSet.getString(1);
+                }
+            }
+        } catch (Exception ex) {
+            //aca me falta capturar la excpcion
+
+
+        }
+        return password;
+
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -271,51 +312,6 @@ public class LoginActivity extends AppCompatActivity {
             mAuthTask = null;
             showProgress(false);
         }
-    }
-
-    public ArrayList<String> getLista() {
-        DB db = new DB();//base
-        ArrayList<String> lista = new ArrayList<>();
-        try {
-            ResultSet resultSet = db.select(Querys.QRY_USUARIOS_ACTIVOS);
-            if (resultSet != null) {
-                while (resultSet.next()) {
-
-                    lista.add(resultSet.getString("name"));
-
-                }
-            }
-        } catch (Exception ex) {
-//aca me falta capturar la excpcion
-
-
-        } finally {
-
-
-        }
-        return lista;
-
-    }
-
-    public String password() {
-        DB db = new DB();//base
-        String password = "";
-        try {
-            String comando = String.format(Querys.QRY_USUARIO, mUserView.getText());
-            ResultSet resultSet = db.select(comando);
-
-            if (resultSet != null) {
-                while (resultSet.next()) {
-                    password = resultSet.getString(1);
-                }
-            }
-        } catch (Exception ex) {
-            //aca me falta capturar la excpcion
-
-
-        }
-        return password;
-
     }
 
 }
