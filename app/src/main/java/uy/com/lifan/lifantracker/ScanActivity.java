@@ -94,7 +94,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                             .main_scan_layout);
 
                     VINUtil validateVIN = new VINUtil();
-                    if ((barcodeValue.length() == 18) && (validateVIN.isValid(barcodeValue.substring(0, 17)))) {
+                    if ((barcodeValue.length() >= 17) && (validateVIN.isValid(barcodeValue.substring(0, 17)))) {
 
                         Location location = locationlistener.actualLocation;
                         Long time = location.getTime();
@@ -104,7 +104,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                         try {
 
                             DB db = new DB();
-                            String insert = String.format(Querys.INRT_LOCATION, barcodeValue, location.getLatitude(), location.getLongitude());
+                            String insert = String.format(Querys.INRT_LOCATION, barcodeValue.substring(0, 17), location.getLatitude(), location.getLongitude());
                             db.execute(insert);
 
 
@@ -118,7 +118,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                         }
                     } else {
 
-                        Snackbar.make(layout, "Vehículo Posicionado correctamente", Snackbar.LENGTH_LONG)
+                        Snackbar.make(layout, "El VIN no es Valido, reintente", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                         errorLocation = false;
 
