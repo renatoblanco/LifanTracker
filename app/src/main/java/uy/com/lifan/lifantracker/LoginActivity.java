@@ -103,10 +103,10 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-
                     barcodeValue = barcode.displayValue;
                     mUserView.setText(barcode.displayValue);
-                    //  Log.d(TAG, "Barcode read: " + barcode.displayValue);
+
+                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
                 } else {
 
                     Log.d(TAG, "No barcode captured, intent data is null");

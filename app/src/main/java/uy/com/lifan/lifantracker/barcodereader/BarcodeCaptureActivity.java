@@ -348,10 +348,10 @@ public final class BarcodeCaptureActivity extends LoginActivity {
                 setResult(CommonStatusCodes.SUCCESS, data);
                 finish();
             } else {
-                Log.d(TAG, "barcode data is null");
+                Log.d(TAG, "Código de barras vacío");
             }
         } else {
-            Log.d(TAG, "no barcode detected");
+            Log.d(TAG, "No se detecto código de barras");
         }
         return barcode != null;
     }

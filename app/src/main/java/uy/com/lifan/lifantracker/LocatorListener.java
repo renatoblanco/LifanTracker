@@ -5,8 +5,10 @@ import android.location.LocationListener;
 import android.os.Bundle;
 
 /**
- * Created by renat on 25/11/2015.
+ * Created by renat on 25/11/2015
+ * this class allows to suscribe as listener to the GPS provideor to get the most current location
  */
+
 public class LocatorListener implements LocationListener {
     Location actualLocation;
 

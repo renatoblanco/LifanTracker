@@ -6,6 +6,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +22,7 @@ import java.util.Date;
 
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
+import uy.com.lifan.lifantracker.Util.VINUtil;
 import uy.com.lifan.lifantracker.barcodereader.BarcodeCaptureActivity;
 
 public class ScanActivity extends AppCompatActivity implements LocationListener {
@@ -49,7 +52,6 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
         locationlistener.actualLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-
         ImageButton cameraButton = (ImageButton) findViewById(R.id.button);
         Button manualButton = (Button) findViewById(R.id.manual);
 
@@ -57,8 +59,8 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
+                //startActivity(intent);
 
             }
         });
@@ -71,12 +73,10 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                 intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
                 intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
 
+                errorLocation = false;
                 startActivityForResult(intent, RC_BARCODE_CAPTURE);
-            /*    if(errorLocation)
-                        Snackbar.make(view, "No se puede obtener la ubicacion del GPS", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                errorLocation=false;
-*/
+
+
             }
         });
 
@@ -90,23 +90,39 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
                     barcodeValue = barcode.displayValue;
 
-                    Location location = locationlistener.actualLocation;
-                    Long time = location.getTime();
-                    Date d = new Date(time);
+                    View layout = (CoordinatorLayout) findViewById(R.id
+                            .main_scan_layout);
+
+                    VINUtil validateVIN = new VINUtil();
+                    if ((barcodeValue.length() == 18) && (validateVIN.isValid(barcodeValue.substring(0, 17)))) {
+
+                        Location location = locationlistener.actualLocation;
+                        Long time = location.getTime();
+                        Date d = new Date(time);
+                        LatLng Pos = new LatLng(location.getLatitude(), location.getLongitude());
+                        Log.d("Location", time.toString() + " " + location.getLatitude() + "" + +location.getLongitude());
+                        try {
+
+                            DB db = new DB();
+                            String insert = String.format(Querys.INRT_LOCATION, barcodeValue, location.getLatitude(), location.getLongitude());
+                            db.execute(insert);
 
 
-                    LatLng Pos = new LatLng(location.getLatitude(), location.getLongitude());
-                    Log.d("Location", time.toString() + " " + location.getLatitude() + "" + +location.getLongitude());
-                    try {
+                            Snackbar.make(layout, "Vehículo Posicionado correctamente", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            errorLocation = false;
 
-                        DB db = new DB();
-                        String insert = String.format(Querys.INRT_LOCATION, barcodeValue, location.getLatitude(), location.getLongitude());
-                        db.execute(insert);
 
-                    } catch (Exception ex) {
+                        } catch (Exception ex) {
+
+                        }
+                    } else {
+
+                        Snackbar.make(layout, "Vehículo Posicionado correctamente", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        errorLocation = false;
 
                     }
-
 
                 } else {
 
@@ -118,10 +134,10 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+
     }
 
     public void onLocationChanged(Location location) {
-        // Se ha encontrado una nueva localización
         Log.d("Location", "on location change Scan" + location.getTime() + " " + location.getLatitude() + "  " + +location.getLongitude());
         actualLocation = location;
     }
