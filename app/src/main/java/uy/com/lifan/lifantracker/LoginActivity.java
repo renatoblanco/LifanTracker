@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     //barcode references
     private String barcodeValue;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
