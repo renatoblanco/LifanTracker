@@ -44,10 +44,10 @@
             android:text="Manual" />
 
 
-
     </RelativeLayout>
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"></include>
+
 </android.support.design.widget.CoordinatorLayout>

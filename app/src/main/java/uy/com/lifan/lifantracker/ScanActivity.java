@@ -45,7 +45,7 @@ public class ScanActivity extends ActivityToolbar implements LocationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan);
+        //setContentView(R.layout.activity_scan);
         locationlistener = new LocatorListener();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
@@ -108,7 +108,7 @@ public class ScanActivity extends ActivityToolbar implements LocationListener {
                             db.execute(insert);
 
 
-                            Snackbar.make(layout, "Vehículo Posicionado correctamente", Snackbar.LENGTH_LONG)
+                            Snackbar.make(layout, R.string.vehiculos_posicionado_ok, Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             errorLocation = false;
 
