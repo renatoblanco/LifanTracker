@@ -32,6 +32,10 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -60,10 +64,7 @@
             android:label="Read Barcode"></activity>
 
         <activity android:name=".ScanActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
     </application>
 

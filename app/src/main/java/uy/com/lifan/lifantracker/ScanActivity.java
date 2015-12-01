@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,10 +26,11 @@ import uy.com.lifan.lifantracker.DB.Querys;
 import uy.com.lifan.lifantracker.Util.VINUtil;
 import uy.com.lifan.lifantracker.barcodereader.BarcodeCaptureActivity;
 
-public class ScanActivity extends ActivityToolbar implements LocationListener {
+public class ScanActivity extends AppCompatActivity implements LocationListener {
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String LOG_TAG = "Scan VIN";
+
     //Geolocation referentes
     private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
     // The minimum time between updates in milliseconds
@@ -39,13 +41,16 @@ public class ScanActivity extends ActivityToolbar implements LocationListener {
     LocationManager locationManager;
     Location actualLocation;
     LocatorListener locationlistener;
+
     //barcode references
     private String barcodeValue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_scan);
+        setContentView(R.layout.activity_scan);
+
         locationlistener = new LocatorListener();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
@@ -74,7 +79,6 @@ public class ScanActivity extends ActivityToolbar implements LocationListener {
 
                 errorLocation = false;
                 startActivityForResult(intent, RC_BARCODE_CAPTURE);
-
 
             }
         });
