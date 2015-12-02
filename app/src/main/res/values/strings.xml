@@ -33,5 +33,6 @@
     <string name="title_activity_scan">ScanActivity</string>
     <string name="title_activity_scanctivity">Scanctivity</string>
     <string name="vehiculos_posicionado_ok">Vehículo Posicionado correctamente</string>
+    <string name="title_activity_register">Registro Exitoso</string>
 
 </resources>

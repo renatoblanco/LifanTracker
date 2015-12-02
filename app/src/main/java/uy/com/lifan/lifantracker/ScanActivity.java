@@ -21,6 +21,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.Date;
 
+import uy.com.lifan.cartracker.RegisterActivity;
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
 import uy.com.lifan.lifantracker.Util.VINUtil;
@@ -63,8 +64,8 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
-                startActivity(intent);
+                //  Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
+                // startActivity(intent);
 
             }
         });
@@ -111,11 +112,14 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                             String insert = String.format(Querys.INRT_LOCATION, barcodeValue.substring(0, 17), location.getLatitude(), location.getLongitude(), sq);
                             db.execute(insert);
 
-
                             Snackbar.make(layout, R.string.vehiculos_posicionado_ok, Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             errorLocation = false;
 
+                            Intent intent = new Intent(ScanActivity.this, RegisterActivity.class);
+                            intent.putExtra(RegisterActivity.latitud, location.getLatitude());
+                            intent.putExtra(RegisterActivity.VIN, barcodeValue.substring(0, 17));
+                            startActivity(intent);
 
                         } catch (Exception ex) {
 

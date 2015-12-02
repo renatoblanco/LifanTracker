@@ -47,7 +47,7 @@
     </RelativeLayout>
 
     <include
-        android:id="@+id/toolbar"
+        android:id="@+id/inc_toolbar"
         layout="@layout/toolbar"></include>
 
 </android.support.design.widget.CoordinatorLayout>

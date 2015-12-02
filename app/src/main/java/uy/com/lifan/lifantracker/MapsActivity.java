@@ -100,7 +100,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
 
                 mMap.addMarker(new MarkerOptions()
                         .position(addedMarker.getPosition()));
-*/
+            */
 
 
             }
@@ -159,7 +159,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         LatLng LIFAN = new LatLng(-34.707616, -56.503064);
         Marker lifan1;
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(LIFAN)      // Sets the center of the map to Mountain View
+                .target(LIFAN)      // Sets the center of the map to Lifan
                 .zoom(17)                   // Sets the zoom
                 .bearing(90)                // Sets the orientation of the camera to east
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
@@ -190,17 +190,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
 
         }
 
-    /*    mMap.addMarker(new MarkerOptions()
-                .position(lifan1.getPosition()));
-        mMap.addMarker(new MarkerOptions()
-                .position(lifan2.getPosition()));
-        mMap.addMarker(new MarkerOptions()
-                .position(lifan3.getPosition()));
-        mMap.addMarker(new MarkerOptions()
-                .position(lifan4.getPosition()));
-        mMap.addMarker(new MarkerOptions()
-                .position(lifan5.getPosition()));
-                */
+
     }
 
 

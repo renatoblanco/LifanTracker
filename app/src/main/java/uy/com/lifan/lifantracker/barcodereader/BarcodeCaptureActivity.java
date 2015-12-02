@@ -59,6 +59,7 @@ import uy.com.lifan.lifantracker.barcodereader.camera.GraphicOverlay;
  * size, and ID of each barcode.
  */
 public final class BarcodeCaptureActivity extends LoginActivity {
+
     // constants used to pass extra data in the intent
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
