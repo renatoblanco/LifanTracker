@@ -64,8 +64,8 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onClick(View view) {
 
-                //  Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
-                // startActivity(intent);
+                Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
+                startActivity(intent);
 
             }
         });

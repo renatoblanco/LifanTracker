@@ -1,7 +1,9 @@
 package uy.com.lifan.cartracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,7 +14,11 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import uy.com.lifan.lifantracker.R;
+import uy.com.lifan.lifantracker.ScanActivity;
 
 public class RegisterActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -21,6 +27,10 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
     public static final String latitud = "latitud";
     public static final String longitud = "longitud";
     public static final String VIN = "VIN";
+
+    // Set the duration of the splash screen
+    private static final long SCREEN_DELAY = 3000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,5 +77,28 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
 
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lifan, 17));
+
+        TextView txtVIN = (TextView) findViewById(R.id.VIN);
+        txtVIN.setText(VIN);
+
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+
+                // Start the next activity
+                Intent mainIntent = new Intent().setClass(
+                        RegisterActivity.this, ScanActivity.class);
+                startActivity(mainIntent);
+                // Close the activity so the user won't able to go back this
+                // activity pressing Back button
+                finish();
+            }
+        };
+
+
+        Timer timer = new Timer();
+        timer.schedule(task, SCREEN_DELAY);
+
+
     }
 }
