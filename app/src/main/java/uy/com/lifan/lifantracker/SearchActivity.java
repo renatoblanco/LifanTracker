@@ -34,6 +34,8 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        this.setTitle(R.string.searchActivity_title);
+
 
         ImageButton scanButton = (ImageButton) findViewById(R.id.button);
         Button searchButton = (Button) findViewById(R.id.btn_find);
@@ -87,7 +89,7 @@ public class SearchActivity extends AppCompatActivity {
 
                         this.VIN.setText(barcodeValue.substring(0, 17));
                     } else {
-                        
+
                         View layout = (CoordinatorLayout) findViewById(R.id
                                 .search_coordinator_layout);
                         this.VIN.setText("");

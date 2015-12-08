@@ -51,6 +51,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+        setTitle(R.string.scanActivity_title);
 
         locationlistener = new LocatorListener();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
