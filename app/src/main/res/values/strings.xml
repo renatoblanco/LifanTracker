@@ -34,5 +34,8 @@
     <string name="title_activity_scanctivity">Scanctivity</string>
     <string name="vehiculos_posicionado_ok">Vehículo Posicionado correctamente</string>
     <string name="title_activity_register">Registro Exitoso</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="search">Buscar</string>
+    <string name="searchActivity">Búsqueda</string>
 
 </resources>

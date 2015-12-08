@@ -18,12 +18,6 @@
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/Btnposicionar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="posicionar" />
-
 
 </FrameLayout>
 

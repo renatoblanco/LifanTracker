@@ -21,13 +21,13 @@ import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.Date;
 
-import uy.com.lifan.cartracker.RegisterActivity;
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
 import uy.com.lifan.lifantracker.Util.VINUtil;
 import uy.com.lifan.lifantracker.barcodereader.BarcodeCaptureActivity;
 
 public class ScanActivity extends AppCompatActivity implements LocationListener {
+
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String LOG_TAG = "Scan VIN";
@@ -64,8 +64,8 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
-                startActivity(intent);
+                //   Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
+                //   startActivity(intent);
 
             }
         });
@@ -80,6 +80,28 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
 
                 errorLocation = false;
                 startActivityForResult(intent, RC_BARCODE_CAPTURE);
+
+            }
+        });
+
+        ImageButton mapButton = (ImageButton) findViewById(R.id.btn_map);
+
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        ImageButton searchButton = (ImageButton) findViewById(R.id.btn_search);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ScanActivity.this, SearchActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -144,6 +166,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
 
     }
 
+
     public void onLocationChanged(Location location) {
         Log.d("Location", "on location change Scan" + location.getTime() + " " + location.getLatitude() + "  " + +location.getLongitude());
         actualLocation = location;
@@ -159,4 +182,21 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
     }
 
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //  locationManager.removeUpdates(locationlistener);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
+    }
 }

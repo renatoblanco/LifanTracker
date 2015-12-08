@@ -23,42 +23,42 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_gravity="bottom"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
         android:layout_weight="1"
         android:background="@drawable/ic_more"
-        android:textStyle="bold"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="23dp"
-        android:layout_marginEnd="23dp" />
+        android:textStyle="bold" />
 
     <ImageButton
         android:id="@+id/btn_map"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="bottom"
         android:layout_weight="1"
         android:background="@drawable/ic_map"
-        android:textStyle=""
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:textStyle="" />
 
     <ImageButton
         android:id="@+id/btn_search"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_weight="1"
-        android:background="@drawable/ic_search"
-        android:textStyle="bold"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_gravity="bottom"
         android:layout_marginLeft="28dp"
-        android:layout_marginStart="28dp" />
+        android:layout_marginStart="28dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_search"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

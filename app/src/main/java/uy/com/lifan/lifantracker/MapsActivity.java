@@ -5,15 +5,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,7 +20,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.sql.ResultSet;
-import java.util.Date;
 
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
@@ -45,7 +38,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         setUpMapIfNeeded();
 
 
-        Button Btnposicionar = (Button) findViewById(R.id.Btnposicionar);
+      /*  Button Btnposicionar = (Button) findViewById(R.id.Btnposicionar);
 
         Btnposicionar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +85,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
                         .setAction("Action", null).show();
 
 
-            /*    Marker addedMarker = mMap.addMarker(new MarkerOptions()
+              Marker addedMarker = mMap.addMarker(new MarkerOptions()
                         .position(Pos)
                         .title("custom-Lifan Motors Uruguay")
                         .snippet("Pos Actual").position(Pos).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3)));
@@ -100,11 +93,11 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
 
                 mMap.addMarker(new MarkerOptions()
                         .position(addedMarker.getPosition()));
-            */
+
 
 
             }
-        });
+        });*/
 
     }
 

@@ -1,4 +1,4 @@
-package uy.com.lifan.cartracker;
+package uy.com.lifan.lifantracker;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,20 +17,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import uy.com.lifan.lifantracker.R;
-import uy.com.lifan.lifantracker.ScanActivity;
-
 public class RegisterActivity extends FragmentActivity implements OnMapReadyCallback {
-
-    private GoogleMap mMap;
 
     public static final String latitud = "latitud";
     public static final String longitud = "longitud";
     public static final String VIN = "VIN";
-
     // Set the duration of the splash screen
-    private static final long SCREEN_DELAY = 3000;
-
+    private static final long SCREEN_DELAY = 5000;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +60,7 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
         LatLng lifan = new LatLng(latitud, longitud);
         mMap.addMarker(new MarkerOptions().position(lifan).title(VIN).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(lifan));
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(lifan)      // Sets the center of the map to Lifan
@@ -85,16 +80,12 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
             @Override
             public void run() {
 
-                // Start the next activity
                 Intent mainIntent = new Intent().setClass(
                         RegisterActivity.this, ScanActivity.class);
                 startActivity(mainIntent);
-                // Close the activity so the user won't able to go back this
-                // activity pressing Back button
                 finish();
             }
         };
-
 
         Timer timer = new Timer();
         timer.schedule(task, SCREEN_DELAY);

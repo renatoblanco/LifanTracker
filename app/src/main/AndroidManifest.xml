@@ -32,17 +32,20 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_login">
-
-        </activity>
+            android:label="@string/app_login" />
         <activity
             android:name=".MapsActivity"
             android:label="@string/app_name" />
+
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/searchActivity" />
         <activity
             android:name=".SplashScreenActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -63,11 +66,14 @@
         <activity
             android:name=".barcodereader.BarcodeCaptureActivity"
             android:label="Read Barcode" />
-        <activity android:name=".ScanActivity"></activity>
-
+        <activity android:name=".ScanActivity" />
         <activity
-            android:name="uy.com.lifan.cartracker.RegisterActivity"
-            android:label="@string/title_activity_register">
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_register" />
+        <activity
+            android:name="uy.com.lifan.cartracker.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 
