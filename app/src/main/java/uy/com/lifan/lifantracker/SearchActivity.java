@@ -35,7 +35,6 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-
         ImageButton scanButton = (ImageButton) findViewById(R.id.button);
         Button searchButton = (Button) findViewById(R.id.btn_find);
         VIN = (EditText) findViewById(R.id.VIN);
@@ -82,21 +81,20 @@ public class SearchActivity extends AppCompatActivity {
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
                     barcodeValue = barcode.displayValue;
 
-                    View layout = (CoordinatorLayout) findViewById(R.id
-                            .main_scan_layout);
 
                     VINUtil validateVIN = new VINUtil();
                     if ((barcodeValue.length() >= 17) && (validateVIN.isValid(barcodeValue.substring(0, 17)))) {
 
                         this.VIN.setText(barcodeValue.substring(0, 17));
+                    } else {
+                        
+                        View layout = (CoordinatorLayout) findViewById(R.id
+                                .search_coordinator_layout);
+                        this.VIN.setText("");
+                        Snackbar.make(layout, "El VIN no es Valido, reintente", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).setActionTextColor(Color.RED).show();
                     }
-                } else {
-                    View layout = (CoordinatorLayout) findViewById(R.id
-                            .search_coordinator_layout);
-                    Snackbar.make(layout, "El VIN no es Valido, reintente", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).setActionTextColor(Color.RED).show();
                 }
-
             } else {
                 Log.d(LOG_TAG, "No barcode captured, intent data is null");
             }

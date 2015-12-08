@@ -21,9 +21,9 @@ public class VINUtil {
         String s = vinNumber;
         s = s.replaceAll("-", "");
         s = s.toUpperCase();
+
         if (s.length() != 17) {
             Log.d(LOG_TAG, "VIN number must be 17 characters");
-
             return false;
         }
 
