@@ -40,6 +40,7 @@
     <string name="title_activity_search">SearchActivity</string>
     <string name="search">Buscar</string>
     <string name="searchActivity">Buscar por VIN</string>
+    <string name="sin_coneccion_red">Aegurece estar conectado a internet</string>
 
 
 </resources>
