@@ -7,7 +7,8 @@
     <FrameLayout
         android:id="@+id/map_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="left|center_vertical">
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -17,20 +18,54 @@
             android:layout_height="204dp"
             tools:context="uy.com.lifan.lifantracker.MapsActivity" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:id="@+id/VIN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="306dp"
+            android:layout_gravity="left|bottom">
+
+            <TextView
+                android:id="@+id/VIN"
+                android:layout_width="277dp"
+                android:layout_height="62dp"
+                android:layout_gravity="left|top"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/engine"
+                android:layout_width="274dp"
+                android:layout_height="62dp"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="4dp"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp" />
+
+            <TextView
+                android:id="@+id/modelo"
+                android:layout_width="274dp"
+                android:layout_height="62dp"
+                android:layout_gravity="left|bottom"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/color"
+                android:layout_width="274dp"
+                android:layout_height="62dp"
+                android:layout_gravity="left|bottom"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/proceso"
+                android:layout_width="274dp"
+                android:layout_height="62dp"
+                android:layout_gravity="left|bottom"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+        </FrameLayout>
 
 
     </FrameLayout>

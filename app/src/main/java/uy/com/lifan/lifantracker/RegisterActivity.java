@@ -72,17 +72,30 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(actualPos)      // Sets the center of the map to Lifan
-                .zoom(8)                   // Sets the zoom
+                .zoom(20)                   // Sets the zoom
                 .bearing(90)                // Sets the orientation of the camera to east
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
 
 
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(8), 2000, null);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actualPos, 11));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(20), 2000, null);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actualPos, 17));
 
         TextView txtVIN = (TextView) findViewById(R.id.VIN);
         txtVIN.setText(VIN);
+
+        TextView engine = (TextView) findViewById(R.id.engine);
+        engine.setText(esteAuto.engine);
+
+        TextView modelo = (TextView) findViewById(R.id.modelo);
+        modelo.setText(esteAuto.modelo);
+
+        TextView color = (TextView) findViewById(R.id.color);
+        color.setText(esteAuto.color);
+
+        TextView proceso = (TextView) findViewById(R.id.proceso);
+        proceso.setText(esteAuto.proceso);
+
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
