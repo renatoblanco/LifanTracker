@@ -3,6 +3,8 @@ package uy.com.lifan.lifantracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,7 +29,7 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
     public static final String longitud = "longitud";
     public static final String VIN = "VIN";
     // Set the duration of the splash screen
-    private static final long SCREEN_DELAY = 5000;
+    private static final long SCREEN_DELAY = 15000;
     private GoogleMap mMap;
 
 
@@ -40,6 +42,30 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        ImageButton mapButton = (ImageButton) findViewById(R.id.btn_map);
+
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, MapsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        ImageButton searchButton = (ImageButton) findViewById(R.id.btn_search);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 
 
@@ -95,6 +121,9 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
 
         TextView proceso = (TextView) findViewById(R.id.proceso);
         proceso.setText(esteAuto.proceso);
+
+        TextView fechaprod = (TextView) findViewById(R.id.fechaprod);
+        fechaprod.setText(esteAuto.fechaFab);
 
         TimerTask task = new TimerTask() {
             @Override
