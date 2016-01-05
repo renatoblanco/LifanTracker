@@ -168,8 +168,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isUserValid(String user) {
-        //return ((user.contains("USREFFA")) && (user.length()==11));
-        return true;
+        return ((user.contains("USREFFA")) && (user.length() == 11));
+
     }
 
     private boolean isPasswordValid(String password) {

@@ -78,7 +78,6 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                 Intent intent = new Intent(ScanActivity.this, BarcodeCaptureActivity.class);
                 intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
                 intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
-
                 errorLocation = false;
                 startActivityForResult(intent, RC_BARCODE_CAPTURE);
 
@@ -141,6 +140,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
 
                             Intent intent = new Intent(ScanActivity.this, RegisterActivity.class);
                             intent.putExtra(RegisterActivity.latitud, location.getLatitude());
+                            intent.putExtra(RegisterActivity.longitud, location.getLongitude());
                             intent.putExtra(RegisterActivity.VIN, barcodeValue.substring(0, 17));
                             startActivity(intent);
 
