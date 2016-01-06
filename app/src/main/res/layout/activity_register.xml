@@ -137,7 +137,6 @@
             android:layout_margin="10dp"
             android:clickable="true"
             android:src="@drawable/ic_info"
-
             app:layout_anchorGravity="bottom|right|end"
             android:baselineAlignBottom="false"
             android:layout_gravity="center_vertical|bottom|right"

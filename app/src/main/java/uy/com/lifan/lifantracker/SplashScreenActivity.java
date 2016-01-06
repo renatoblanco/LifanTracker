@@ -8,6 +8,10 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Window;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,10 +46,48 @@ public class SplashScreenActivity extends Activity {
                         && cm.getActiveNetworkInfo().isAvailable()
                         && cm.getActiveNetworkInfo().isConnected()) {
 
-                    //if have the network connection Start the next activity otherwise send a message.
-                    Intent mainIntent = new Intent().setClass(
-                            SplashScreenActivity.this, LoginActivity.class);
-                    startActivity(mainIntent);
+
+                    URL url = null;
+                    try {
+                        url = new URL("http://192.168.2.2:8080/admin");
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    HttpURLConnection connection = null;
+                    try {
+                        connection = (HttpURLConnection)
+                                url.openConnection();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    connection.setRequestProperty("User-Agent", "yourAgent");
+                    connection.setRequestProperty("Connection", "close");
+                    connection.setConnectTimeout(1000);
+
+                    try {
+                        connection.connect();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        if (connection.getResponseCode() == 200) {
+                            Intent mainIntent = new Intent().setClass(
+                                    SplashScreenActivity.this, LoginActivity.class);
+                            startActivity(mainIntent);
+                        } else {
+                            Intent mainIntent = new Intent().setClass(
+                                    SplashScreenActivity.this, NoConectionScreenActivity.class);
+                            startActivity(mainIntent);
+
+
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Intent mainIntent = new Intent().setClass(
+                                SplashScreenActivity.this, NoConectionScreenActivity.class);
+                        startActivity(mainIntent);
+                    }
 
 
                 } else {
