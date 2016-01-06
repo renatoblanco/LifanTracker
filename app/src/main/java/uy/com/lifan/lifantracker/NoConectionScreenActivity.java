@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Created by renat on 04/01/2016.
@@ -31,10 +32,18 @@ public class NoConectionScreenActivity extends Activity {
         ImageView image = (ImageView) findViewById(R.id.error_image);
 
         String network_error = getIntent().getStringExtra(error_network);
+        TextView network_err = (TextView) findViewById(R.id.message_network);
 
-        if (network_error.compareTo("LTE") == 0)
+        if (network_error.compareTo("LTE") == 0) {
 
-            image.setImageIcon(R.drawable.cast_ic_notification_0);
+            image.setImageResource(R.drawable.ic_lte);
+            network_err.setText(R.string.sin_coneccion_lte);
+
+        } else {
+
+            image.setImageResource(R.drawable.ic_vpn);
+            network_err.setText(R.string.sin_coneccion_vpn);
+        }
 
         Button btnRetry = (Button) findViewById(R.id.retry);
 

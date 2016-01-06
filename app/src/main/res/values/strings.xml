@@ -40,7 +40,9 @@
     <string name="title_activity_search">SearchActivity</string>
     <string name="search">Buscar</string>
     <string name="searchActivity">Buscar por VIN</string>
-    <string name="sin_coneccion_red">Aegurece estar conectado a internet</string>
+    <string name="sin_coneccion_red">Asegurece estar conectado a internet</string>
+    <string name="sin_coneccion_lte">Verifique su conexion LTE</string>
+    <string name="sin_coneccion_vpn">Verifique la conexion a la VPN</string>
 
 
 </resources>
