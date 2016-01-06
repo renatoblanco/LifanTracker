@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 
 /**
  * Created by renat on 04/01/2016.
@@ -14,6 +15,7 @@ import android.widget.Button;
 
 public class NoConectionScreenActivity extends Activity {
 
+    public static final String error_network = "error_network";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,14 @@ public class NoConectionScreenActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.no_conectioin_screen);
+
+        ImageView image = (ImageView) findViewById(R.id.error_image);
+
+        String network_error = getIntent().getStringExtra(error_network);
+
+        if (network_error.compareTo("LTE") == 0)
+
+            image.setImageIcon(R.drawable.cast_ic_notification_0);
 
         Button btnRetry = (Button) findViewById(R.id.retry);
 

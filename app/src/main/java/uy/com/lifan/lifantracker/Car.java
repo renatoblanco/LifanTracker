@@ -11,6 +11,8 @@ public class Car {
     public String modelo;
     public Integer numeroProd;
     public String fechaFab;
+    public double latitud;
+    public double longitud;
 
 
 }

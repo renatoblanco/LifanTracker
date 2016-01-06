@@ -1,14 +1,21 @@
 package uy.com.lifan.lifantracker;
 
-public class Global {
+import android.app.Activity;
+import android.os.Bundle;
+
+public class Global extends Activity {
 
     //Clase que agrupa todas las variables globales de la app.
-//gjghjhghjtt renato
     //renato
+
     private static Global instance;
     private String user;
 
     private Global() {
+    }
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     public static Global getInstance() {
@@ -23,4 +30,6 @@ public class Global {
     public void setUser(String user) {
         this.user = user;
     }
+
+
 }

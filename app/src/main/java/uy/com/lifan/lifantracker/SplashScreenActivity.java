@@ -23,6 +23,8 @@ public class SplashScreenActivity extends Activity {
 
     // Set the duration of the splash screen
     private static final long SPLASH_SCREEN_DELAY = 3000;
+    private String error_network = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,66 +41,18 @@ public class SplashScreenActivity extends Activity {
             @Override
             public void run() {
 
-                ConnectivityManager cm = (ConnectivityManager)
-                        getSystemService(Context.CONNECTIVITY_SERVICE);
-
-                if (cm.getActiveNetworkInfo() != null
-                        && cm.getActiveNetworkInfo().isAvailable()
-                        && cm.getActiveNetworkInfo().isConnected()) {
-
-
-                    URL url = null;
-                    try {
-                        url = new URL("http://192.168.2.2:8080/admin");
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
-                    HttpURLConnection connection = null;
-                    try {
-                        connection = (HttpURLConnection)
-                                url.openConnection();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    connection.setRequestProperty("User-Agent", "yourAgent");
-                    connection.setRequestProperty("Connection", "close");
-                    connection.setConnectTimeout(1000);
-
-                    try {
-                        connection.connect();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        if (connection.getResponseCode() == 200) {
-                            Intent mainIntent = new Intent().setClass(
-                                    SplashScreenActivity.this, LoginActivity.class);
-                            startActivity(mainIntent);
-                        } else {
-                            Intent mainIntent = new Intent().setClass(
-                                    SplashScreenActivity.this, NoConectionScreenActivity.class);
-                            startActivity(mainIntent);
-
-
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Intent mainIntent = new Intent().setClass(
-                                SplashScreenActivity.this, NoConectionScreenActivity.class);
-                        startActivity(mainIntent);
-                    }
-
-
+                if (is_conected()) {
+                    Intent mainIntent = new Intent().setClass(
+                            SplashScreenActivity.this, LoginActivity.class);
+                    startActivity(mainIntent);
                 } else {
-
                     Intent mainIntent = new Intent().setClass(
                             SplashScreenActivity.this, NoConectionScreenActivity.class);
+
+                    mainIntent.putExtra(NoConectionScreenActivity.error_network, error_network);
+
                     startActivity(mainIntent);
-
-
                 }
-
 
                 // Close the activity so the user won't able to go back this
                 // activity pressing Back button
@@ -110,6 +64,68 @@ public class SplashScreenActivity extends Activity {
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
 
+
+    }
+
+
+    public boolean is_conected() {
+
+        boolean conected = false;
+
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected()) {
+
+            URL url = null;
+            try {
+                url = new URL("http://192.168.2.2:8080/admin");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                conected = false;
+                error_network = "VPN";
+            }
+            HttpURLConnection connection = null;
+            try {
+                connection = (HttpURLConnection)
+                        url.openConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+                error_network = "VPN";
+            }
+            connection.setRequestProperty("User-Agent", "yourAgent");
+            connection.setRequestProperty("Connection", "close");
+            connection.setConnectTimeout(1000);
+
+            try {
+                connection.connect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (connection.getResponseCode() == 200) {
+                    conected = true;
+                } else {
+                    conected = false;
+                    error_network = "VPN";
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                conected = false;
+                error_network = "VPN";
+            }
+
+
+        } else {
+
+            conected = false;
+            error_network = "LTE";
+
+        }
+        return conected;
 
     }
 
