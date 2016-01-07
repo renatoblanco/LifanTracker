@@ -1,5 +1,4 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -130,23 +129,19 @@
         android:layout_gravity="right"
         android:layout_weight="300">
 
-        <android.support.design.widget.FloatingActionButton
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="63dp"
             android:id="@+id/detail"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_margin="10dp"
-            android:clickable="true"
+            android:layout_gravity="center_vertical|bottom"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/ic_info"
-            app:layout_anchorGravity="bottom|right|end"
-            android:baselineAlignBottom="false"
-            android:layout_gravity="center_vertical|bottom|right"
-            android:focusableInTouchMode="true"
-            android:focusable="true"
-            android:nestedScrollingEnabled="false"
-            android:visibility="visible"
-            android:baselineAligned="true"
-            android:measureWithLargestChild="true"
-            android:showDividers="none" />
+            android:adjustViewBounds="true"
+            android:transitionName="@string/abc_capital_on"
+            android:visibility="visible" />
     </LinearLayout>
 
     <include

@@ -1,9 +1,8 @@
 package uy.com.lifan.lifantracker;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-public class Global extends Activity {
+public class Global {
 
     //Clase que agrupa todas las variables globales de la app.
     //renato
@@ -15,7 +14,7 @@ public class Global extends Activity {
     }
 
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
     }
 
     public static Global getInstance() {
