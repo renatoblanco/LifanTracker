@@ -25,7 +25,12 @@
             android:layout_width="306dp"
             android:layout_height="306dp"
             android:orientation="vertical"
-            android:layout_gravity="left|bottom">
+            android:layout_gravity="bottom|left"
+            android:baselineAligned="false"
+            android:measureWithLargestChild="false"
+            android:nestedScrollingEnabled="false"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="110dp">
 
             <TextView
                 android:id="@+id/VIN"
@@ -40,9 +45,9 @@
                 android:elegantTextHeight="true"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:layout_marginLeft="6dp"
                 android:autoText="false"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:hint="VIN" />
 
 
             <TextView
@@ -51,12 +56,12 @@
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:singleLine="true"
-                android:layout_marginLeft="6dp"
                 android:elegantTextHeight="true"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="#4e4646"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:hint="engine" />
 
             <TextView
                 android:id="@+id/modelo"
@@ -69,8 +74,8 @@
                 android:textStyle="bold|normal"
                 android:textSize="18dp"
                 android:textColor="#4e4646"
-                android:layout_marginLeft="6dp"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:hint="modelo" />
 
             <TextView
                 android:id="@+id/color"
@@ -82,8 +87,8 @@
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="#4e4646"
-                android:layout_marginLeft="6dp"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:hint="color" />
 
             <TextView
                 android:id="@+id/proceso"
@@ -95,8 +100,9 @@
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="#4e4646"
-                android:layout_marginLeft="6dp"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:hint="proceso"
+                android:layout_marginTop="3dp" />
 
             <TextView
                 android:id="@+id/fechaprod"
@@ -110,8 +116,8 @@
                 android:elegantTextHeight="true"
                 android:textStyle="bold|normal"
                 android:textSize="18dp"
-                android:layout_marginLeft="6dp"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:hint="fechaprod" />
 
 
         </LinearLayout>
@@ -122,23 +128,93 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="109dp"
-        android:layout_height="375dp"
+        android:layout_height="398dp"
         android:layout_gravity="right"
         android:layout_weight="300">
 
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="63dp"
+            android:layout_width="54dp"
+            android:layout_height="58dp"
             android:id="@+id/detail"
             android:layout_gravity="center_vertical|bottom"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="15dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/ic_info"
-            android:adjustViewBounds="true"
-            android:transitionName="@string/abc_capital_on"
+            android:src="@drawable/ic_info2"
+            android:adjustViewBounds="false"
             android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="112dp"
+        android:layout_height="308dp"
+        android:layout_gravity="bottom|left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="VIN"
+            android:id="@+id/textView"
+            android:layout_marginTop="8dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Motor"
+            android:id="@+id/lbl_motor"
+            android:layout_marginTop="18dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Modelo"
+            android:id="@+id/lbl_modelo"
+            android:layout_marginTop="18dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="8dp"
+            android:autoText="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Color"
+            android:id="@+id/lbl_color"
+            android:layout_marginTop="15dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="8dp"
+            android:autoText="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Proceso"
+            android:id="@+id/lbl_proceso"
+            android:layout_marginTop="15dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="8dp"
+            android:autoText="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Fecha"
+            android:id="@+id/lbl_fechprod"
+            android:layout_marginTop="16dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="8dp"
+            android:autoText="false" />
     </LinearLayout>
 
     <include

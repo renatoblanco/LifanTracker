@@ -13,8 +13,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import java.sql.ResultSet;
+
+import uy.com.lifan.lifantracker.DB.DB;
+import uy.com.lifan.lifantracker.DB.Querys;
 import uy.com.lifan.lifantracker.Util.VINUtil;
 import uy.com.lifan.lifantracker.barcodereader.BarcodeCaptureActivity;
 
@@ -88,6 +93,18 @@ public class SearchActivity extends AppCompatActivity {
                     if ((barcodeValue.length() >= 17) && (validateVIN.isValid(barcodeValue.substring(0, 17)))) {
 
                         this.VIN.setText(barcodeValue.substring(0, 17));
+                        LatLng location_vin = locationVIN(barcodeValue.substring(0, 17));
+
+                        //si location_vin ,longitud y latitud ==0 el auto no tiene pos GPS
+                        //hay que buscarlo en el stock y si esta, entonces mostrarlo en ekl galpon. Calidad, PDI...etc
+
+                        Intent intent = new Intent(SearchActivity.this, RegisterActivity.class);
+                        intent.putExtra(RegisterActivity.latitud, location_vin.latitude);
+                        intent.putExtra(RegisterActivity.longitud, location_vin.longitude);
+                        intent.putExtra(RegisterActivity.VIN, barcodeValue.substring(0, 17));
+                        startActivity(intent);
+
+
                     } else {
 
                         View layout = (CoordinatorLayout) findViewById(R.id
@@ -127,4 +144,28 @@ public class SearchActivity extends AppCompatActivity {
         super.onStart();
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
     }
+
+
+    private LatLng locationVIN(String VIN) {
+        DB db = new DB();
+        LatLng location = new LatLng(0, 0);
+        try {
+
+            String comando = String.format(Querys.QRY_LOCATIONS_VIN, VIN);
+            ResultSet resultSet = db.select(comando);
+
+
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    location = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
+
+                }
+            }
+        } catch (Exception ex) {
+
+        }
+        return location;
+    }
+
+
 }
