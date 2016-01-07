@@ -146,7 +146,7 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
         DB db = new DB();//base
         Car car = new Car();
         try {
-            String comando = String.format(Querys.QRY_DATOS_VIN, vin, vin);
+            String comando = String.format(Querys.QRY_DATOS_VIN, vin, vin, vin);
             ResultSet resultSet = db.select(comando);
 
             if (resultSet != null) {
