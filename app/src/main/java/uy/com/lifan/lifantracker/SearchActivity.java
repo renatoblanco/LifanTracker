@@ -32,7 +32,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String LOG_TAG = "Scan VIN";
-    EditText VIN;
+    private EditText VIN;
     private View mProgressView;
     private View searchView;
 
@@ -59,8 +59,32 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //   Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
-                //   startActivity(intent);
+                Util validateVIN = new Util();
+                String carVIN = VIN.getText().toString().toUpperCase();
+
+                if ((carVIN.length() == 17) && (validateVIN.isValid(carVIN))) {
+                    LatLng location_vin = locationVIN(carVIN);
+
+                    //si location_vin ,longitud y latitud ==0 el auto no tiene pos GPS
+                    //hay que buscarlo en el stock y si esta, entonces mostrarlo en ekl galpon. Calidad, PDI...etc
+
+                    Intent intent = new Intent(SearchActivity.this, RegisterActivity.class);
+                    intent.putExtra(RegisterActivity.latitud, location_vin.latitude);
+                    intent.putExtra(RegisterActivity.longitud, location_vin.longitude);
+                    intent.putExtra(RegisterActivity.VIN, carVIN);
+                    showProgress(false);
+                    startActivity(intent);
+
+
+                } else {
+
+                    View layout = (CoordinatorLayout) findViewById(R.id
+                            .search_coordinator_layout);
+                    VIN.setText("");
+                    Snackbar.make(layout, "El VIN no es Valido, reintente", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).setActionTextColor(Color.RED).show();
+                }
+
 
             }
         });
