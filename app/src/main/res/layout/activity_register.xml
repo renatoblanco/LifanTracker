@@ -128,7 +128,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="109dp"
-        android:layout_height="398dp"
+        android:layout_height="458dp"
         android:layout_gravity="right"
         android:layout_weight="300">
 

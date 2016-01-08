@@ -23,7 +23,7 @@ import java.util.Date;
 
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
-import uy.com.lifan.lifantracker.Util.VINUtil;
+import uy.com.lifan.lifantracker.Util.Util;
 import uy.com.lifan.lifantracker.barcodereader.BarcodeCaptureActivity;
 
 public class ScanActivity extends AppCompatActivity implements LocationListener {
@@ -119,7 +119,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                     View layout = (CoordinatorLayout) findViewById(R.id
                             .main_scan_layout);
 
-                    VINUtil validateVIN = new VINUtil();
+                    Util validateVIN = new Util();
                     if ((barcodeValue.length() >= 17) && (validateVIN.isValid(barcodeValue.substring(0, 17)))) {
 
                         Location location = locationlistener.actualLocation;

@@ -3,8 +3,11 @@ package uy.com.lifan.lifantracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,7 +26,7 @@ import java.util.TimerTask;
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
 
-public class RegisterActivity extends FragmentActivity implements OnMapReadyCallback {
+public class RegisterActivity extends FragmentActivity implements OnMapReadyCallback, View.OnTouchListener {
 
     public static final String latitud = "latitud";
     public static final String longitud = "longitud";
@@ -31,6 +34,8 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
     // Set the duration of the splash screen
     private static final long SCREEN_DELAY = 15000;
     private GoogleMap mMap;
+    Timer timer = new Timer();
+    private boolean is_first = true;
 
 
     @Override
@@ -38,12 +43,22 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         setTitle(R.string.registerActivity_title);
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
         ImageButton mapButton = (ImageButton) findViewById(R.id.btn_map);
+        LinearLayout pantalla = (LinearLayout) findViewById(R.id.map_container);
+
+        FrameLayout rootContariner = (FrameLayout) findViewById(R.id.root_container);
+
+        rootContariner.setOnTouchListener(this);
+        pantalla.setOnTouchListener(this);
+
 
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +98,27 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
         mMap = googleMap;
         mMap.getUiSettings().setMapToolbarEnabled(false);
 
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            public void onMapClick(LatLng point) {
+                timer.cancel();
+
+            }
+        });
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                timer.cancel();
+            }
+        });
+        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                if (is_first)
+                    is_first = false;
+                else
+                    timer.cancel();
+            }
+        });
         // Add a marker in Lifan and move the camera
 
         double latitud = getIntent().getDoubleExtra(this.latitud, -34.707616);
@@ -136,9 +172,8 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
             }
         };
 
-        Timer timer = new Timer();
-        timer.schedule(task, SCREEN_DELAY);
 
+        timer.schedule(task, SCREEN_DELAY);
 
     }
 
@@ -168,5 +203,9 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
         return car;
     }
 
-
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        timer.cancel();
+        return false;
+    }
 }

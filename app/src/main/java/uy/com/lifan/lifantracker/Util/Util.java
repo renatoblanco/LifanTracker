@@ -2,7 +2,7 @@ package uy.com.lifan.lifantracker.Util;
 
 import android.util.Log;
 
-public class VINUtil {
+public class Util {
     /**
      * Check if a VIN Number is Valid
      * Based on VIN.java class at:
@@ -114,5 +114,6 @@ public class VINUtil {
             return "Error";
 
     }
+
 
 }

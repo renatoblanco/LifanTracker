@@ -1,7 +1,11 @@
 package uy.com.lifan.lifantracker;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -20,7 +24,7 @@ import java.sql.ResultSet;
 
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
-import uy.com.lifan.lifantracker.Util.VINUtil;
+import uy.com.lifan.lifantracker.Util.Util;
 import uy.com.lifan.lifantracker.barcodereader.BarcodeCaptureActivity;
 
 public class SearchActivity extends AppCompatActivity {
@@ -29,6 +33,8 @@ public class SearchActivity extends AppCompatActivity {
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String LOG_TAG = "Scan VIN";
     EditText VIN;
+    private View mProgressView;
+    private View searchView;
 
 
     //barcode references
@@ -41,10 +47,13 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         this.setTitle(R.string.searchActivity_title);
 
+        mProgressView = findViewById(R.id.search_progress);
+        searchView = findViewById(R.id.search_relative_layout);
 
         ImageButton scanButton = (ImageButton) findViewById(R.id.button);
         Button searchButton = (Button) findViewById(R.id.btn_find);
         VIN = (EditText) findViewById(R.id.VIN);
+
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,9 +98,9 @@ public class SearchActivity extends AppCompatActivity {
                     barcodeValue = barcode.displayValue;
 
 
-                    VINUtil validateVIN = new VINUtil();
+                    Util validateVIN = new Util();
                     if ((barcodeValue.length() >= 17) && (validateVIN.isValid(barcodeValue.substring(0, 17)))) {
-
+                        showProgress(true);
                         this.VIN.setText(barcodeValue.substring(0, 17));
                         LatLng location_vin = locationVIN(barcodeValue.substring(0, 17));
 
@@ -102,6 +111,7 @@ public class SearchActivity extends AppCompatActivity {
                         intent.putExtra(RegisterActivity.latitud, location_vin.latitude);
                         intent.putExtra(RegisterActivity.longitud, location_vin.longitude);
                         intent.putExtra(RegisterActivity.VIN, barcodeValue.substring(0, 17));
+                        showProgress(false);
                         startActivity(intent);
 
 
@@ -165,6 +175,42 @@ public class SearchActivity extends AppCompatActivity {
 
         }
         return location;
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            searchView.setVisibility(show ? View.GONE : View.VISIBLE);
+            searchView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    searchView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            searchView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 
 

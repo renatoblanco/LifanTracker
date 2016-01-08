@@ -7,8 +7,18 @@
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true">
 
+    <ProgressBar
+        android:id="@+id/search_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        android:paddingLeft="20dp" />
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/search_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -16,6 +26,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="uy.com.lifan.lifantracker.SearchActivity">
+
 
         <LinearLayout
             android:id="@+id/search_form"
@@ -30,6 +41,8 @@
                 android:layout_gravity="center_horizontal"
                 android:clickable="false"
                 android:src="@drawable/qr_160" />
+
+
         </LinearLayout>
 
 
@@ -38,14 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/search_form"
+            android:layout_marginLeft="49dp"
+            android:layout_marginRight="49dp"
             android:layout_marginTop="26dp"
             android:autoText="false"
             android:hint="VIN"
             android:maxLength="17"
             android:maxLines="1"
-            android:singleLine="true"
-            android:layout_marginLeft="49dp"
-            android:layout_marginRight="49dp" />
+            android:singleLine="true" />
 
         <Button
             android:id="@+id/btn_find"
@@ -54,10 +67,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/search_form"
-            android:layout_marginTop="145dp"
-            android:text="@string/search"
             android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp" />
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="145dp"
+            android:text="@string/search" />
 
     </RelativeLayout>
 
