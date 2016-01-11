@@ -111,6 +111,18 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton search_tool_Button = (ImageButton) findViewById(R.id.btn_search);
+
+        search_tool_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchActivity.this, SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 
     @Override
