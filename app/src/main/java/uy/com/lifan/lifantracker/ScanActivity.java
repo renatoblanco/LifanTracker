@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -42,6 +43,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
     LocationManager locationManager;
     Location actualLocation;
     LocatorListener locationlistener;
+    private EditText VIN;
 
     //barcode references
     private String barcodeValue;
@@ -59,17 +61,59 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
         locationlistener.actualLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         ImageButton cameraButton = (ImageButton) findViewById(R.id.button);
-        Button manualButton = (Button) findViewById(R.id.manual);
+        Button manualButton = (Button) findViewById(R.id.scan_manual);
+
+        VIN = (EditText) findViewById(R.id.scan_VIN);
+
 
         manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //   Intent intent = new Intent(ScanActivity.this, MapsActivity.class);
-                //   startActivity(intent);
+                View layout = (CoordinatorLayout) findViewById(R.id
+                        .main_scan_layout);
+
+                Util validateVIN = new Util();
+
+
+                if ((VIN.getText().toString().length() >= 17) && (validateVIN.isValid(VIN.getText().toString()))) {
+
+                    Location location = locationlistener.actualLocation;
+                    Date d = new Date(location.getTime());
+                    java.sql.Timestamp sq = new java.sql.Timestamp(d.getTime());
+
+                    LatLng Pos = new LatLng(location.getLatitude(), location.getLongitude());
+                    Log.d("Location", d.toString() + " " + location.getLatitude() + "" + +location.getLongitude());
+                    try {
+
+                        DB db = new DB();
+                        String insert = String.format(Querys.INRT_LOCATION, VIN.getText().toString(), location.getLatitude(), location.getLongitude(), sq);
+                        db.execute(insert);
+
+                        Snackbar.make(layout, R.string.vehiculos_posicionado_ok, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        errorLocation = false;
+
+                        Intent intent = new Intent(ScanActivity.this, RegisterActivity.class);
+                        intent.putExtra(RegisterActivity.latitud, location.getLatitude());
+                        intent.putExtra(RegisterActivity.longitud, location.getLongitude());
+                        intent.putExtra(RegisterActivity.VIN, VIN.getText().toString());
+                        startActivity(intent);
+
+                    } catch (Exception ex) {
+
+                    }
+                } else {
+                    Snackbar.make(layout, "El VIN no es Valido, reintente", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).setActionTextColor(Color.RED).show();
+                    errorLocation = false;
+
+                }
+
 
             }
         });
+
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +165,8 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
 
                     Util validateVIN = new Util();
                     if ((barcodeValue.length() >= 17) && (validateVIN.isValid(barcodeValue.substring(0, 17)))) {
+
+                        VIN.setText(barcodeValue.substring(0, 17));
 
                         Location location = locationlistener.actualLocation;
                         Date d = new Date(location.getTime());

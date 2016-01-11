@@ -33,15 +33,33 @@
                 android:src="@drawable/qr_160" />
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/scan_VIN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_form"
+            android:layout_marginLeft="49dp"
+            android:layout_marginRight="49dp"
+            android:layout_marginTop="26dp"
+            android:autoText="false"
+            android:digits="0,1,2,3,4,5,6,7,8,9,Q,W,E,R,T,Y,U,I,O,P,A,S,D,F,G,H,J,K,L,Z,X,C,V,B,N,M"
+            android:hint="VIN"
+            android:inputType="textCapCharacters"
+            android:maxLength="17"
+            android:maxLines="1"
+            android:singleLine="true" />
+
         <Button
-            android:id="@+id/manual"
-            android:layout_width="wrap_content"
+            android:id="@+id/scan_manual"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/search_form"
-            android:layout_marginTop="115dp"
-            android:text="Manual" />
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="145dp"
+            android:text="ubicar" />
 
 
     </RelativeLayout>
