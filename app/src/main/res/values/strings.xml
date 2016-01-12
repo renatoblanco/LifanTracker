@@ -6,6 +6,7 @@
     <string name="title_activity_saludo">SaludoActivity</string>
     <string name="title_main_activity">Atividad Principal</string>
     <string name="searchActivity_title">Búsqueda por VIN</string>
+    <string name="searchAdvancedActivity_title">Búsqueda avanzada</string>
     <string name="registerActivity_title">Registro Exitoso</string>
     <string name="scanActivity_title">Escanee el VIN</string>
     <string name="nombre">Ingresar</string>
@@ -43,6 +44,19 @@
     <string name="sin_coneccion_red">Asegurece estar conectado a internet</string>
     <string name="sin_coneccion_lte">Verifique su conexion LTE</string>
     <string name="sin_coneccion_vpn">Verifique la conexion a la VPN</string>
+    <string name="models_prompt">Modelo</string>
+
+    <string-array name="models_arrays">
+        <item>LF7132 -320</item>
+        <item>LF7162-620</item>
+        <item>X60-LF6430 (SUV)</item>
+        <item>X60-SR-LF6430</item>
+        <item>LF1022-DX (MiniTruck)</item>
+        <item>LF1022-LX (MiniTruck)</item>
+        <item>530-LF7153</item>
+        <item>530-LX-LF7153</item>
+        <item>LF6401(MiniVAN)</item>
+    </string-array>
 
 
 </resources>

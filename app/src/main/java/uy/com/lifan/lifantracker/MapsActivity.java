@@ -30,75 +30,21 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
     float[] valuesAcelerometro = new float[3];
     float[] valuesBrujula = new float[3];
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    public final static String search = "search";
+    public final static String query = "query";
+    private boolean is_search;
+    private String consulta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        is_search = getIntent().getBooleanExtra(search, false);
+        consulta = getIntent().getStringExtra(query);
+
         setUpMapIfNeeded();
-
-
-      /*  Button Btnposicionar = (Button) findViewById(R.id.Btnposicionar);
-
-        Btnposicionar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-                Criteria criteria = new Criteria();
-                //criteria.setAccuracy(Criteria.ACCURACY_FINE);
-                String bestProvider = locationManager.getBestProvider(criteria, false);
-                Location location = locationManager.getLastKnownLocation(bestProvider);
-                Long time = location.getTime();
-                Date d = new Date(time);
-
-                Log.d("", time.toString());
-
-                Log.d("Location", "MAPS" + location.getLatitude() + "" + +location.getLongitude());
-
-                if (location == null)
-                    Snackbar.make(v, "location null", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                else
-                    Snackbar.make(v, d.toString(), Snackbar.LENGTH_INDEFINITE)
-                            .setAction("Action", null).show();
-
-
-                LatLng Pos = new LatLng(location.getLatitude(), location.getLongitude());
-                // Double rotacion = GetOrientacion();
-
-                try {
-
-                    DB db = new DB();
-                    String insert = String.format(Querys.INRT_LOCATION, "9UK64ED78C77238", location.getLatitude(), location.getLongitude());
-                    db.execute(insert);
-
-                } catch (Exception ex) {
-
-                }
-
-
-                setUpMap();
-
-                Snackbar.make(v, "Vehículo posicionado", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-
-              Marker addedMarker = mMap.addMarker(new MarkerOptions()
-                        .position(Pos)
-                        .title("custom-Lifan Motors Uruguay")
-                        .snippet("Pos Actual").position(Pos).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3)));
-                addedMarker.setRotation(210);
-
-                mMap.addMarker(new MarkerOptions()
-                        .position(addedMarker.getPosition()));
-
-
-
-            }
-        });*/
-
     }
 
     @Override
@@ -143,16 +89,16 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
      */
     private void setUpMap() {
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        mMap.getUiSettings().setMapToolbarEnabled(true);
+        // mMap.getUiSettings().setMapToolbarEnabled(true);
         mMap.setMyLocationEnabled(true);
         mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
 
-        LatLng LIFAN = new LatLng(-34.707616, -56.503064);
-        Marker lifan1;
+        LatLng locatorLatLong = new LatLng(-34.707616, -56.503064);
+        Marker marker;
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(LIFAN)      // Sets the center of the map to Lifan
+                .target(locatorLatLong)      // Sets the center of the map to Lifan
                 .zoom(17)                   // Sets the zoom
                 .bearing(90)                // Sets the orientation of the camera to east
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
@@ -160,22 +106,29 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
 
 
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LIFAN, 17));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locatorLatLong, 17));
 
 
         DB db = new DB();
         try {
-            ResultSet resultSet = db.select(Querys.QRY_LOCATIONS);
+            ResultSet resultSet;
+
+            if (is_search)
+                resultSet = db.select(this.consulta);
+            else
+                resultSet = db.select(Querys.QRY_LOCATIONS);
+
             if (resultSet != null) {
                 while (resultSet.next()) {
-                    LIFAN = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
-                    lifan1 = mMap.addMarker(new MarkerOptions()
-                            .position(LIFAN)
-                            .title("1-Lifan Motors Uruguay")
-                            .snippet(LIFAN.latitude + "" + LIFAN.longitude).position(LIFAN).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3)));
-                    lifan1.setRotation(210);
+                    locatorLatLong = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
                     mMap.addMarker(new MarkerOptions()
-                            .position(lifan1.getPosition()));
+                            .position(locatorLatLong).flat(true).rotation(210)
+                            .title(resultSet.getString("vin"))
+                            .snippet(locatorLatLong.latitude + "" + locatorLatLong.longitude).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3))).setFlat(true);
+                    //  marker.setRotation(210);
+
+                    //     mMap.addMarker(new MarkerOptions()
+                    //           .position(marker.getPosition()));
 
                 }
             }

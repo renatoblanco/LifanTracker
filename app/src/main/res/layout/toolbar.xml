@@ -21,7 +21,7 @@
     <ImageButton
         android:id="@+id/btn_search"
         style="?android:attr/borderlessButtonStyle"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:layout_width="60dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"

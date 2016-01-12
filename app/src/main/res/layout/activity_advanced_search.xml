@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true">
+
+    <ProgressBar
+        android:id="@+id/search_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:paddingLeft="20dp"
+        android:visibility="gone" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/search_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="uy.com.lifan.lifantracker.SearchActivity">
+
+
+        <LinearLayout
+            android:id="@+id/search_form"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/VIN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_form"
+                android:layout_marginLeft="49dp"
+                android:layout_marginRight="49dp"
+                android:layout_marginTop="2dp"
+                android:autoText="false"
+                android:digits="0,1,2,3,4,5,6,7,8,9,Q,W,E,R,T,Y,U,I,O,P,A,S,D,F,G,H,J,K,L,Z,X,C,V,B,N,M"
+                android:hint="VIN"
+                android:inputType="textCapCharacters"
+                android:maxLength="17"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/engine"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_form"
+                android:layout_marginLeft="49dp"
+                android:layout_marginRight="49dp"
+                android:layout_marginTop="0dp"
+                android:autoText="false"
+                android:hint="Motor"
+                android:maxLength="17"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <Spinner
+                android:id="@+id/spinner_model"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="49dp"
+                android:layout_marginRight="49dp"
+                android:entries="@array/models_arrays"
+                android:prompt="@string/models_prompt" />/>
+
+            <Button
+                android:id="@+id/btn_find"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/search_form"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="145dp"
+                android:text="@string/search" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/inc_toolbar"
+        layout="@layout/toolbar"></include>
+
+</android.support.design.widget.CoordinatorLayout>

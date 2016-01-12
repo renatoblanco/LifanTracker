@@ -128,7 +128,10 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
         Car esteAuto = datosAuto(VIN);
 
         LatLng actualPos = new LatLng(latitud, longitud);
-        mMap.addMarker(new MarkerOptions().position(actualPos).title(VIN).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3)));
+
+        mMap.addMarker(new MarkerOptions().position(actualPos).title(VIN).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3)).flat(true));
+
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(actualPos));
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 

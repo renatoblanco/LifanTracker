@@ -47,7 +47,7 @@
                 android:textStyle="bold"
                 android:autoText="false"
                 android:textAlignment="textStart"
-                android:hint="VIN" />
+                android:hint="No disponible" />
 
 
             <TextView
@@ -61,7 +61,7 @@
                 android:textStyle="bold"
                 android:textColor="#4e4646"
                 android:textAlignment="textStart"
-                android:hint="engine" />
+                android:hint="No disponible" />
 
             <TextView
                 android:id="@+id/modelo"
@@ -75,7 +75,7 @@
                 android:textSize="18dp"
                 android:textColor="#4e4646"
                 android:textAlignment="textStart"
-                android:hint="modelo" />
+                android:hint="No disponible" />
 
             <TextView
                 android:id="@+id/color"
@@ -88,7 +88,7 @@
                 android:textStyle="bold"
                 android:textColor="#4e4646"
                 android:textAlignment="textStart"
-                android:hint="color" />
+                android:hint="No disponible" />
 
             <TextView
                 android:id="@+id/proceso"
@@ -101,7 +101,7 @@
                 android:textStyle="bold"
                 android:textColor="#4e4646"
                 android:textAlignment="textStart"
-                android:hint="proceso"
+                android:hint="No disponible"
                 android:layout_marginTop="3dp" />
 
             <TextView
@@ -117,7 +117,7 @@
                 android:textStyle="bold|normal"
                 android:textSize="18dp"
                 android:textAlignment="textStart"
-                android:hint="fechaprod" />
+                android:hint="No disponible" />
 
 
         </LinearLayout>
