@@ -109,6 +109,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locatorLatLong, 17));
 
+        Integer countCars = 0;
 
         DB db = new DB();
         try {
@@ -119,6 +120,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
             else
                 resultSet = db.select(Querys.QRY_LOCATIONS);
 
+
             if (resultSet != null) {
                 while (resultSet.next()) {
                     locatorLatLong = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
@@ -127,16 +129,13 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
                             .title(resultSet.getString("vin"))
                             .snippet(locatorLatLong.latitude + "" + locatorLatLong.longitude).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3))).setFlat(true);
                     //  marker.setRotation(210);
-
-                    //     mMap.addMarker(new MarkerOptions()
-                    //           .position(marker.getPosition()));
-
+                    countCars++;
                 }
             }
         } catch (Exception ex) {
 
         }
-        Toast toast = Toast.makeText(getApplicationContext(), "308 autos encontrados", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), countCars + " autos encontrados", Toast.LENGTH_SHORT);
         toast.show();
 
     }
