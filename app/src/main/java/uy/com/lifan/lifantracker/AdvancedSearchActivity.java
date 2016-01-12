@@ -12,11 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.google.android.gms.maps.model.LatLng;
-
-import java.sql.ResultSet;
-
-import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
 
 public class AdvancedSearchActivity extends AppCompatActivity {
@@ -24,6 +19,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "Advanced search";
     private EditText VIN;
+    private EditText motor;
     private View mProgressView;
     private View searchView;
 
@@ -40,6 +36,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         ImageButton scanButton = (ImageButton) findViewById(R.id.button);
         Button searchButton = (Button) findViewById(R.id.btn_find);
         VIN = (EditText) findViewById(R.id.VIN);
+        motor = (EditText) findViewById(R.id.engine);
 
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +46,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
 
                                                 Intent intent = new Intent(AdvancedSearchActivity.this, MapsActivity.class);
                                                 intent.putExtra(MapsActivity.search, true);
-                                                String qry = String.format(Querys.QRY_ADVANCED_SEARCH, "9UK", "");
+                                                String qry = String.format(Querys.QRY_ADVANCED_SEARCH, VIN.getText(), motor.getText());
                                                 intent.putExtra(MapsActivity.query, qry);
                                                 startActivity(intent);
 
@@ -110,27 +107,6 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
     }
 
-
-    private LatLng locationVIN(String VIN) {
-        DB db = new DB();
-        LatLng location = new LatLng(0, 0);
-        try {
-
-            String comando = String.format(Querys.QRY_LOCATIONS_VIN, VIN);
-            ResultSet resultSet = db.select(comando);
-
-
-            if (resultSet != null) {
-                while (resultSet.next()) {
-                    location = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
-
-                }
-            }
-        } catch (Exception ex) {
-
-        }
-        return location;
-    }
 
     /**
      * Shows the progress UI and hides the login form.
