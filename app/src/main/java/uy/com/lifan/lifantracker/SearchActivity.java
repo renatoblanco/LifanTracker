@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.maps.model.LatLng;
@@ -33,6 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String LOG_TAG = "Scan VIN";
     private EditText VIN;
+    private TextView avanced_text;
     private View mProgressView;
     private View searchView;
 
@@ -53,6 +55,17 @@ public class SearchActivity extends AppCompatActivity {
         ImageButton scanButton = (ImageButton) findViewById(R.id.button);
         Button searchButton = (Button) findViewById(R.id.btn_find);
         VIN = (EditText) findViewById(R.id.VIN);
+
+        avanced_text = (TextView) findViewById(R.id.textView_avanzada);
+
+
+        avanced_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchActivity.this, AdvancedSearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         searchButton.setOnClickListener(new View.OnClickListener() {

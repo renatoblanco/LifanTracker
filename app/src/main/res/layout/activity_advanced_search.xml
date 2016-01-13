@@ -69,30 +69,15 @@
                 android:id="@+id/spinner_models"
                 android:layout_width="132dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="49dp"
                 android:layout_marginRight="0dp"
                 android:entries="@array/models_arrays"
-                android:prompt="@string/models_prompt"
-                android:layout_marginLeft="49dp" />
+                android:prompt="@string/models_prompt" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <Spinner
-                    android:id="@+id/spinner_colors"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="0dp"
-                    android:entries="@array/colors_array"
-                    android:prompt="@string/colors_prompt"
-                    android:layout_marginLeft="49dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/lote_text"
@@ -115,7 +100,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/search_form"
-                    android:layout_marginLeft="49dp"
                     android:layout_marginRight="49dp"
                     android:layout_marginTop="2dp"
                     android:autoText="false"
@@ -127,6 +111,44 @@
                     android:singleLine="true" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <Spinner
+                    android:id="@+id/spinner_colors"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="49dp"
+                    android:layout_marginRight="0dp"
+                    android:entries="@array/colors_array"
+                    android:prompt="@string/colors_prompt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/etxt_fromdate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:hint="@string/from_date"
+                    android:layout_marginLeft="49dp" />
+
+                <EditText
+                    android:id="@+id/etxt_todate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:hint="@string/to_date" />
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btn_find"
                 android:layout_width="match_parent"
@@ -136,8 +158,9 @@
                 android:layout_below="@+id/search_form"
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
-                android:layout_marginTop="145dp"
+                android:layout_marginTop="70dp"
                 android:text="@string/search" />
+
         </LinearLayout>
 
 

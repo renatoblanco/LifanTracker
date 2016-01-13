@@ -3,15 +3,21 @@ package uy.com.lifan.lifantracker;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import uy.com.lifan.lifantracker.DB.Querys;
 
@@ -27,6 +33,16 @@ public class AdvancedSearchActivity extends AppCompatActivity {
     private View searchView;
     private Spinner modelSpinner;
     private Spinner colorSpinner;
+
+    private EditText fromDateEtxt;
+    private EditText toDateEtxt;
+
+    Calendar newCalendar = Calendar.getInstance();
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
+    private DatePickerDialog fromDatePickerDialog;
+
+    private DatePickerDialog toDatePickerDialog;
 
 
     @Override
@@ -46,6 +62,45 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         proceso = (EditText) findViewById(R.id.procesoText);
         modelSpinner = (Spinner) findViewById(R.id.spinner_models);
         colorSpinner = (Spinner) findViewById(R.id.spinner_colors);
+
+        fromDateEtxt = (EditText) findViewById(R.id.etxt_fromdate);
+        toDateEtxt = (EditText) findViewById(R.id.etxt_todate);
+
+        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                fromDateEtxt.setText(dateFormatter.format(newDate.getTime()));
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        toDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                toDateEtxt.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+
+        fromDateEtxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                showFrom();
+                fromDatePickerDialog.show();
+            }
+        });
+
+        toDateEtxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                showTo();
+                toDatePickerDialog.show();
+
+            }
+        });
 
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -165,5 +220,32 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         }
     }
 
+    private void showFrom() {
 
+        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                fromDateEtxt.setText(dateFormatter.format(newDate.getTime()));
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+
+    }
+
+
+    private void showTo() {
+
+        toDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                toDateEtxt.setText(dateFormatter.format(newDate.getTime()));
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+
+    }
 }

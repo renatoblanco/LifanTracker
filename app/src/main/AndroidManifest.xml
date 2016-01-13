@@ -11,9 +11,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-feature android:name="android.hardware.camera" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
     <permission
@@ -39,11 +37,12 @@
 
         <activity
             android:name=".SearchActivity"
-            android:label="@string/searchActivity" />
+            android:label="@string/searchActivity">
+
+        </activity>
         <activity
             android:name=".SplashScreenActivity"
             android:label="@string/app_name">
-
         </activity>
 
         <meta-data
@@ -62,8 +61,12 @@
         <activity
             android:name=".barcodereader.BarcodeCaptureActivity"
             android:label="Read Barcode" />
-        <activity android:name=".ScanActivity">
 
+        <activity android:name=".ScanActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -74,16 +77,11 @@
         <activity
             android:name=".NoConectionScreenActivity"
             android:label="@string/app_name">
-
         </activity>
-
         <activity
             android:name=".AdvancedSearchActivity"
             android:label="@string/searchAdvancedActivity_title">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
     </application>

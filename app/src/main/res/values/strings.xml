@@ -46,6 +46,8 @@
     <string name="sin_coneccion_vpn">Verifique la conexion a la VPN</string>
     <string name="models_prompt">Modelo</string>
     <string name="colors_prompt">Color</string>
+    <string name="from_date">Desde</string>
+    <string name="to_date">hasta</string>
 
     <string-array name="models_arrays">
         <item>Modelo</item>

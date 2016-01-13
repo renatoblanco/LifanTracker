@@ -71,8 +71,20 @@
             android:layout_below="@+id/search_form"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:layout_marginTop="145dp"
+            android:layout_marginTop="110dp"
             android:text="@string/search" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Avanzada"
+            android:id="@+id/textView_avanzada"
+            android:layout_below="@+id/btn_find"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold" />
+
 
     </RelativeLayout>
 

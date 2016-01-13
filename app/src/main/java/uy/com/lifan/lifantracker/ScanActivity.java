@@ -177,6 +177,10 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                         try {
 
                             DB db = new DB();
+
+                            String update = String.format(Querys.UPDT_LOCATION_INACTIVE, barcodeValue.substring(0, 17));
+                            db.execute(update);
+
                             String insert = String.format(Querys.INRT_LOCATION, barcodeValue.substring(0, 17), location.getLatitude(), location.getLongitude(), sq);
                             db.execute(insert);
 
