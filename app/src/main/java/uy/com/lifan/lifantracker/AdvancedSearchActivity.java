@@ -21,6 +21,8 @@ public class AdvancedSearchActivity extends AppCompatActivity {
     private static final String LOG_TAG = "Advanced search";
     private EditText VIN;
     private EditText motor;
+    private EditText lote;
+    private EditText proceso;
     private View mProgressView;
     private View searchView;
     private Spinner modelSpinner;
@@ -40,20 +42,33 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         Button searchButton = (Button) findViewById(R.id.btn_find);
         VIN = (EditText) findViewById(R.id.VIN);
         motor = (EditText) findViewById(R.id.engine);
+        lote = (EditText) findViewById(R.id.lote_text);
+        proceso = (EditText) findViewById(R.id.procesoText);
         modelSpinner = (Spinner) findViewById(R.id.spinner_models);
         colorSpinner = (Spinner) findViewById(R.id.spinner_colors);
-
 
 
         searchButton.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
+                                                String finalQuery = Querys.QRY_ADVANCED_SEARCH;
+                                                if (VIN.getText().length() > 0)
+                                                    finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_VIN, VIN.getText()));
+                                                if (lote.getText().length() > 0)
+                                                    finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_LOTE, lote.getText()));
+                                                if (proceso.getText().length() > 0)
+                                                    finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_PROCESO, proceso.getText()));
+                                                if (motor.getText().length() > 0)
+                                                    finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_MOTOR, motor.getText()));
+                                                if (colorSpinner.getSelectedItemId() > 0)
+                                                    finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_COLOR, colorSpinner.getSelectedItem().toString()));
+                                                if (modelSpinner.getSelectedItemId() > 0)
+                                                    finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_MODELO, modelSpinner.getSelectedItem().toString()));
 
 
                                                 Intent intent = new Intent(AdvancedSearchActivity.this, MapsActivity.class);
                                                 intent.putExtra(MapsActivity.search, true);
-                                                String qry = String.format(Querys.QRY_ADVANCED_SEARCH, VIN.getText(), motor.getText(), colorSpinner.getSelectedItem().toString(), modelSpinner.getSelectedItem().toString());
-                                                intent.putExtra(MapsActivity.query, qry);
+                                                intent.putExtra(MapsActivity.query, finalQuery);
                                                 startActivity(intent);
 
                                             }

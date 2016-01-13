@@ -42,7 +42,7 @@
                 android:layout_below="@+id/search_form"
                 android:layout_marginLeft="49dp"
                 android:layout_marginRight="49dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="0dp"
                 android:autoText="false"
                 android:digits="0,1,2,3,4,5,6,7,8,9,Q,W,E,R,T,Y,U,I,O,P,A,S,D,F,G,H,J,K,L,Z,X,C,V,B,N,M"
                 android:hint="VIN"
@@ -67,21 +67,65 @@
 
             <Spinner
                 android:id="@+id/spinner_models"
-                android:layout_width="fill_parent"
+                android:layout_width="132dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="49dp"
-                android:layout_marginRight="49dp"
+                android:layout_marginRight="0dp"
                 android:entries="@array/models_arrays"
-                android:prompt="@string/models_prompt" />
+                android:prompt="@string/models_prompt"
+                android:layout_marginLeft="49dp" />
 
-            <Spinner
-                android:id="@+id/spinner_colors"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="49dp"
-                android:layout_marginRight="49dp"
-                android:entries="@array/colors_array"
-                android:prompt="@string/colors_prompt" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:id="@+id/spinner_colors"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:entries="@array/colors_array"
+                    android:prompt="@string/colors_prompt"
+                    android:layout_marginLeft="49dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/lote_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/search_form"
+                    android:layout_marginLeft="49dp"
+                    android:layout_marginRight="49dp"
+                    android:layout_marginTop="2dp"
+                    android:autoText="false"
+                    android:digits="1234567890"
+                    android:hint="Lote"
+                    android:inputType="number"
+                    android:maxLength="17"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/procesoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/search_form"
+                    android:layout_marginLeft="49dp"
+                    android:layout_marginRight="49dp"
+                    android:layout_marginTop="2dp"
+                    android:autoText="false"
+                    android:digits="1234567890"
+                    android:hint="Proceso"
+                    android:inputType="number"
+                    android:maxLength="17"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_find"

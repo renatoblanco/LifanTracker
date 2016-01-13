@@ -48,6 +48,7 @@
     <string name="colors_prompt">Color</string>
 
     <string-array name="models_arrays">
+        <item>Modelo</item>
         <item>LF7132 -320</item>
         <item>LF7162-620</item>
         <item>X60-LF6430 (SUV)</item>
@@ -60,13 +61,14 @@
     </string-array>
 
     <string-array name="colors_array">
+        <item>Color</item>
         <item>Amber Gold</item>
         <item>Black</item>
         <item>Blue</item>
         <item>Dark Grey</item>
         <item>Elegant Silver</item>
         <item>Gold</item>
-        <item>Gree</item>
+        <item>Green</item>
         <item>Grey</item>
         <item>Purple</item>
         <item>Red</item>
