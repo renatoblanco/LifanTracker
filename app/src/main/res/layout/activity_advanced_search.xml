@@ -66,13 +66,22 @@
                 android:singleLine="true" />
 
             <Spinner
-                android:id="@+id/spinner_model"
+                android:id="@+id/spinner_models"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="49dp"
                 android:layout_marginRight="49dp"
                 android:entries="@array/models_arrays"
-                android:prompt="@string/models_prompt" />/>
+                android:prompt="@string/models_prompt" />
+
+            <Spinner
+                android:id="@+id/spinner_colors"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="49dp"
+                android:layout_marginRight="49dp"
+                android:entries="@array/colors_array"
+                android:prompt="@string/colors_prompt" />
 
             <Button
                 android:id="@+id/btn_find"

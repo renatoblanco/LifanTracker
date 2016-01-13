@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import uy.com.lifan.lifantracker.DB.Querys;
 
@@ -22,6 +23,8 @@ public class AdvancedSearchActivity extends AppCompatActivity {
     private EditText motor;
     private View mProgressView;
     private View searchView;
+    private Spinner modelSpinner;
+    private Spinner colorSpinner;
 
 
     @Override
@@ -37,6 +40,9 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         Button searchButton = (Button) findViewById(R.id.btn_find);
         VIN = (EditText) findViewById(R.id.VIN);
         motor = (EditText) findViewById(R.id.engine);
+        modelSpinner = (Spinner) findViewById(R.id.spinner_models);
+        colorSpinner = (Spinner) findViewById(R.id.spinner_colors);
+
 
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +52,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
 
                                                 Intent intent = new Intent(AdvancedSearchActivity.this, MapsActivity.class);
                                                 intent.putExtra(MapsActivity.search, true);
-                                                String qry = String.format(Querys.QRY_ADVANCED_SEARCH, VIN.getText(), motor.getText());
+                                                String qry = String.format(Querys.QRY_ADVANCED_SEARCH, VIN.getText(), motor.getText(), colorSpinner.getSelectedItem().toString(), modelSpinner.getSelectedItem().toString());
                                                 intent.putExtra(MapsActivity.query, qry);
                                                 startActivity(intent);
 

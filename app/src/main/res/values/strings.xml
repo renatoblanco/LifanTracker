@@ -45,6 +45,7 @@
     <string name="sin_coneccion_lte">Verifique su conexion LTE</string>
     <string name="sin_coneccion_vpn">Verifique la conexion a la VPN</string>
     <string name="models_prompt">Modelo</string>
+    <string name="colors_prompt">Color</string>
 
     <string-array name="models_arrays">
         <item>LF7132 -320</item>
@@ -56,6 +57,24 @@
         <item>530-LF7153</item>
         <item>530-LX-LF7153</item>
         <item>LF6401(MiniVAN)</item>
+    </string-array>
+
+    <string-array name="colors_array">
+        <item>Amber Gold</item>
+        <item>Black</item>
+        <item>Blue</item>
+        <item>Dark Grey</item>
+        <item>Elegant Silver</item>
+        <item>Gold</item>
+        <item>Gree</item>
+        <item>Grey</item>
+        <item>Purple</item>
+        <item>Red</item>
+        <item>Silver</item>
+        <item>Tungsten Grey</item>
+        <item>White</item>
+        <item>White Diamon</item>
+        <item>Yellow</item>
     </string-array>
 
 
