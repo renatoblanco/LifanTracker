@@ -157,6 +157,7 @@ public class SearchActivity extends AppCompatActivity {
                         //hay que buscarlo en el stock y si esta, entonces mostrarlo en ekl galpon. Calidad, PDI...etc
 
                         Intent intent = new Intent(SearchActivity.this, RegisterActivity.class);
+                        intent.putExtra(RegisterActivity.timeout, false);
                         intent.putExtra(RegisterActivity.latitud, location_vin.latitude);
                         intent.putExtra(RegisterActivity.longitud, location_vin.longitude);
                         intent.putExtra(RegisterActivity.VIN, barcodeValue.substring(0, 17));

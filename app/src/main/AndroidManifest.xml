@@ -83,6 +83,11 @@
             android:label="@string/searchAdvancedActivity_title">
 
         </activity>
+        <activity
+            android:name=".DetailInfoActivity"
+            android:label="@string/DetailInfoActivity_title">
+
+        </activity>
 
     </application>
 

@@ -1,6 +1,7 @@
 package uy.com.lifan.lifantracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -46,6 +47,23 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         consulta = getIntent().getStringExtra(query);
 
         setUpMapIfNeeded();
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+                LatLng location_vin = locationVIN(marker.getTitle());
+
+                Intent intent = new Intent(MapsActivity.this, RegisterActivity.class);
+                intent.putExtra(RegisterActivity.latitud, location_vin.latitude);
+                intent.putExtra(RegisterActivity.longitud, location_vin.longitude);
+                intent.putExtra(RegisterActivity.VIN, marker.getTitle());
+                startActivity(intent);
+
+            }
+
+        });
     }
 
     @Override
@@ -127,7 +145,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
                     mMap.addMarker(new MarkerOptions()
                             .position(locatorLatLong).flat(true).rotation(210)
                             .title(resultSet.getString("vin"))
-                            .snippet(locatorLatLong.latitude + "" + locatorLatLong.longitude).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3))).setFlat(true);
+                            .snippet(getString(R.string.more_options_marker_message)).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3))).setFlat(true);
                     //  marker.setRotation(210);
                     countCars++;
                 }
@@ -195,4 +213,26 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
             // La precisión del sensor ha cambiado
         }
     }
+
+    private LatLng locationVIN(String VIN) {
+        DB db = new DB();
+        LatLng location = new LatLng(0, 0);
+        try {
+
+            String comando = String.format(Querys.QRY_LOCATIONS_VIN, VIN);
+            ResultSet resultSet = db.select(comando);
+
+
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    location = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
+
+                }
+            }
+        } catch (Exception ex) {
+
+        }
+        return location;
+    }
+
 }

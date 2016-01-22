@@ -119,6 +119,10 @@ public class AdvancedSearchActivity extends AppCompatActivity {
                                                     finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_COLOR, colorSpinner.getSelectedItem().toString()));
                                                 if (modelSpinner.getSelectedItemId() > 0)
                                                     finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_MODELO, modelSpinner.getSelectedItem().toString()));
+                                                if (fromDateEtxt.getText().toString().compareTo("") != 0)
+                                                    finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_DESDE, fromDateEtxt.getText().toString()));
+                                                if (toDateEtxt.getText().toString().compareTo("") != 0)
+                                                    finalQuery = finalQuery.concat(String.format(Querys.QRY_ADVANCED_SEARCH_HASTA, toDateEtxt.getText().toString()));
 
 
                                                 Intent intent = new Intent(AdvancedSearchActivity.this, MapsActivity.class);

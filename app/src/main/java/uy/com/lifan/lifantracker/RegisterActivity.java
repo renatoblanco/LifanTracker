@@ -30,9 +30,10 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
 
     public static final String latitud = "latitud";
     public static final String longitud = "longitud";
+    public static final String timeout = "timeout";
     public static final String VIN = "VIN";
     // Set the duration of the splash screen
-    private static final long SCREEN_DELAY = 15000;
+    private static final long SCREEN_DELAY = 2000;
     private GoogleMap mMap;
     Timer timer = new Timer();
     private boolean is_first = true;
@@ -51,6 +52,9 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
 
 
+        ImageButton detailButton = (ImageButton) findViewById(R.id.detail);
+
+
         ImageButton mapButton = (ImageButton) findViewById(R.id.btn_map);
         LinearLayout pantalla = (LinearLayout) findViewById(R.id.map_container);
 
@@ -64,6 +68,17 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RegisterActivity.this, MapsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        detailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(RegisterActivity.this, DetailInfoActivity.class);
+                intent.putExtra(RegisterActivity.VIN, getIntent().getStringExtra(VIN));
                 startActivity(intent);
 
             }
@@ -175,8 +190,8 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
             }
         };
 
-
-        timer.schedule(task, SCREEN_DELAY);
+        if (getIntent().getBooleanExtra("timeout", true))
+            timer.schedule(task, SCREEN_DELAY);
 
     }
 

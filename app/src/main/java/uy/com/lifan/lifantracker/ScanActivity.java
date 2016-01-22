@@ -189,6 +189,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                             errorLocation = false;
 
                             Intent intent = new Intent(ScanActivity.this, RegisterActivity.class);
+                            intent.putExtra(RegisterActivity.timeout, true);
                             intent.putExtra(RegisterActivity.latitud, location.getLatitude());
                             intent.putExtra(RegisterActivity.longitud, location.getLongitude());
                             intent.putExtra(RegisterActivity.VIN, barcodeValue.substring(0, 17));

@@ -18,9 +18,10 @@ public class Querys {
     public static final String QRY_ADVANCED_SEARCH = "select * from android.lifan_android_locations loc, m_productionplan pp, m_product p where  pp.m_product_id=p.m_product_id and pp.z_vin = loc.vin  and loc.islast='Y'   and  p.M_Product_category_id=2100017 and p.m_attributeset_id=2100018 and pp.isactive='Y'";
     public static final String QRY_ADVANCED_SEARCH_VIN = " AND pp.z_vin ilike '%%%s%%'";
     public static final String QRY_ADVANCED_SEARCH_MOTOR = " and z_engine ilike '%%%s%%'";
-    public static final String QRY_ADVANCED_SEARCH_COLOR = " and color =trim('%s') ";
+    public static final String QRY_ADVANCED_SEARCH_COLOR = " and trim(color) =trim('%s') ";
     public static final String QRY_ADVANCED_SEARCH_MODELO = " and p.value = '%s'";
     public static final String QRY_ADVANCED_SEARCH_LOTE = " and pp.z_shipment ilike '%%%s%%'";
     public static final String QRY_ADVANCED_SEARCH_PROCESO = " and pp.z_vin in (select vin from effa_li li, effa_li_linea lil where lil.effa_li_id=li.effa_li_id and proceso  ilike '%%%s%%' and vin is not null) ";
-
+    public static final String QRY_ADVANCED_SEARCH_DESDE = " and z_enddate::date >='%s'";
+    public static final String QRY_ADVANCED_SEARCH_HASTA = " and z_enddate::date <='%s'";
 }

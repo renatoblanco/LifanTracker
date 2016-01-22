@@ -48,6 +48,8 @@
     <string name="colors_prompt">Color</string>
     <string name="from_date">Desde</string>
     <string name="to_date">hasta</string>
+    <string name="more_options_marker_message">Persione por mas detalles</string>
+    <string name="DetailInfoActivity_title">Informacion Detallada</string>
 
     <string-array name="models_arrays">
         <item>Modelo</item>
