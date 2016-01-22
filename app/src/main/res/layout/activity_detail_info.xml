@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_gravity="bottom"
-            android:src="@drawable/x60_landscape" />
+            android:src="@drawable/x60_landscape"
+            android:contextClickable="true" />
 
 
         <LinearLayout
@@ -121,7 +122,7 @@
                 android:layout_marginTop="6dp" />
 
             <TextView
-                android:id="@+id/txt_label"
+                android:id="@+id/txt_lote"
                 android:layout_width="253dp"
                 android:layout_height="30dp"
                 android:elegantTextHeight="true"

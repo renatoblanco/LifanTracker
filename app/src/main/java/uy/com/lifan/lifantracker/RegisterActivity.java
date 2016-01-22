@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -215,7 +216,8 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
 
             }
         } catch (Exception ex) {
-            //aca me falta capturar la excpcion
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.exception_message, Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         return car;

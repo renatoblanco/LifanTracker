@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -249,8 +250,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         } catch (Exception ex) {
-            //aca me falta capturar la excpcion
-
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.exception_message, Toast.LENGTH_SHORT);
+            toast.show();
 
         }
         return password;

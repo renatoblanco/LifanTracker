@@ -50,6 +50,7 @@
     <string name="to_date">hasta</string>
     <string name="more_options_marker_message">Persione por mas detalles</string>
     <string name="DetailInfoActivity_title">Informacion Detallada</string>
+    <string name="exception_message">Ha ocurrido un error, consulte con Sistemas.</string>
 
     <string-array name="models_arrays">
         <item>Modelo</item>

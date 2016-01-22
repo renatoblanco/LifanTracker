@@ -13,6 +13,9 @@ public class Car {
     public String fechaFab;
     public double latitud;
     public double longitud;
+    public String lote;
+    public String lifan_keycode;
+    public String invoice;
 
 
 }

@@ -230,7 +230,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
                 }
             }
         } catch (Exception ex) {
-
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.exception_message, Toast.LENGTH_SHORT);
+            toast.show();
         }
         return location;
     }

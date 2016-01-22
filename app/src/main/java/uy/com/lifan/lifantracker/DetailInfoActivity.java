@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.ResultSet;
 
@@ -51,6 +53,33 @@ public class DetailInfoActivity extends FragmentActivity {
             }
         });
 
+        String VIN = getIntent().getStringExtra(this.VIN);
+
+        Car esteAuto = datosAuto(VIN);
+
+        TextView txtVIN = (TextView) findViewById(R.id.VIN);
+        txtVIN.setText(VIN);
+
+        TextView engine = (TextView) findViewById(R.id.engine);
+        engine.setText(esteAuto.engine);
+
+        TextView modelo = (TextView) findViewById(R.id.modelo);
+        modelo.setText(esteAuto.modelo);
+
+        TextView color = (TextView) findViewById(R.id.color);
+        color.setText(esteAuto.color);
+
+        TextView proceso = (TextView) findViewById(R.id.proceso);
+        proceso.setText(esteAuto.proceso);
+
+        TextView fechaprod = (TextView) findViewById(R.id.fechaprod);
+        fechaprod.setText(esteAuto.fechaFab);
+
+        TextView lote = (TextView) findViewById(R.id.txt_lote);
+        lote.setText(esteAuto.lote);
+        TextView key = (TextView) findViewById(R.id.txt_key);
+        key.setText(esteAuto.lifan_keycode);
+
 
     }
 
@@ -71,11 +100,17 @@ public class DetailInfoActivity extends FragmentActivity {
                     car.modelo = resultSet.getString("modelo");
                     car.engine = resultSet.getString("z_engine");
                     car.proceso = resultSet.getString("proceso");
+                    car.lote = resultSet.getString("z_shipment");
+                    car.lifan_keycode = resultSet.getString("lifan_keycode");
+                    car.invoice = resultSet.getString("invoice");
+
                 }
 
             }
         } catch (Exception ex) {
-            //aca me falta capturar la excpcion
+
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.exception_message, Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         return car;
