@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
+import uy.com.lifan.lifantracker.R;
+
 
 public class DB extends _Default implements Runnable {
 
@@ -35,6 +37,8 @@ public class DB extends _Default implements Runnable {
         } catch (Exception e) {
             this._mensagem = e.getMessage();
             this._status = false;
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.exception_message, Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 
@@ -46,6 +50,8 @@ public class DB extends _Default implements Runnable {
         } catch (Exception e) {
             this._mensagem = e.getMessage();
             this._status = false;
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.exception_message, Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         if (this.conn == null) {
@@ -65,9 +71,12 @@ public class DB extends _Default implements Runnable {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.exception_message, Toast.LENGTH_SHORT);
+                toast.show();
 
             } finally {
                 this.conn = null;
+
             }
         }
     }
@@ -80,6 +89,8 @@ public class DB extends _Default implements Runnable {
         } catch (Exception e) {
             this._status = false;
             this._mensagem = e.getMessage();
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.exception_message, Toast.LENGTH_SHORT);
+            toast.show();
         }
         return resultSet;
     }
@@ -92,6 +103,8 @@ public class DB extends _Default implements Runnable {
         } catch (Exception e) {
             this._status = false;
             this._mensagem = e.getMessage();
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.exception_message, Toast.LENGTH_SHORT);
+            toast.show();
         }
         return resultSet;
     }

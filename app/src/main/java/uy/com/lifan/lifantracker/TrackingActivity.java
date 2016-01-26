@@ -1,11 +1,6 @@
 package uy.com.lifan.lifantracker;
 
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -27,24 +22,20 @@ import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
 
 
-public class MapsActivity extends FragmentActivity implements LocationListener {
+public class TrackingActivity extends FragmentActivity implements LocationListener {
 
-    float[] valuesAcelerometro = new float[3];
-    float[] valuesBrujula = new float[3];
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public final static String search = "search";
-    public final static String query = "query";
-    private boolean is_search;
-    private String consulta;
+    public static final String param_VIN = "param_VIN";
+    private String VIN;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_tracking);
 
-        is_search = getIntent().getBooleanExtra(search, false);
-        consulta = getIntent().getStringExtra(query);
+
+        VIN = getIntent().getStringExtra(param_VIN);
 
         setUpMapIfNeeded();
 
@@ -53,13 +44,13 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
             @Override
             public void onInfoWindowClick(Marker marker) {
 
-                LatLng location_vin = locationVIN(marker.getTitle());
+                LatLng location_vin = locationVIN(VIN);
 
-                Intent intent = new Intent(MapsActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(TrackingActivity.this, RegisterActivity.class);
                 intent.putExtra(RegisterActivity.latitud, location_vin.latitude);
                 intent.putExtra(RegisterActivity.timeout, false);
                 intent.putExtra(RegisterActivity.longitud, location_vin.longitude);
-                intent.putExtra(RegisterActivity.VIN, marker.getTitle());
+                intent.putExtra(RegisterActivity.VIN, VIN);
                 startActivity(intent);
 
             }
@@ -134,27 +125,28 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         try {
             ResultSet resultSet;
 
-            if (is_search)
-                resultSet = db.select(this.consulta);
-            else
-                resultSet = db.select(Querys.QRY_LOCATIONS);
+            String comando = String.format(Querys.QRY_TRACKING_VIN, this.VIN);
+            resultSet = db.select(comando);
 
 
             if (resultSet != null) {
+
                 while (resultSet.next()) {
+                    countCars++;
                     locatorLatLong = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
                     mMap.addMarker(new MarkerOptions()
                             .position(locatorLatLong).flat(true).rotation(210)
-                            .title(resultSet.getString("vin"))
-                            .snippet(getString(R.string.more_options_marker_message)).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3))).setFlat(true);
+                            .title(countCars.toString())
+                            .snippet(resultSet.getString("created").substring(0, 19)).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3))).setFlat(true);
                     //  marker.setRotation(210);
-                    countCars++;
+
+
                 }
             }
         } catch (Exception ex) {
 
         }
-        Toast toast = Toast.makeText(getApplicationContext(), countCars + " autos encontrados", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), countCars + " posición encontrada", Toast.LENGTH_LONG);
         toast.show();
 
     }
@@ -165,55 +157,6 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
 
     }
 
-
-    public Double GetOrientacion() {
-
-        String servicio = Context.SENSOR_SERVICE;
-        SensorManager sensorManager =
-                (SensorManager) getSystemService(servicio);
-
-        Sensor sensorAcelerometro = sensorManager
-                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
-        Sensor sensorOrientation = sensorManager
-                .getDefaultSensor(Sensor.TYPE_ORIENTATION);
-
-
-        float[] values = new float[3];
-        float[] R = new float[9];
-
-        ListenerSensor listenerAceleracion = new ListenerSensor();
-
-        sensorManager.registerListener(listenerAceleracion,
-                sensorAcelerometro, SensorManager.SENSOR_DELAY_NORMAL);
-
-        ListenerSensor listenerOrientacion = new ListenerSensor();
-
-        sensorManager.registerListener(listenerOrientacion,
-                sensorOrientation, SensorManager.SENSOR_DELAY_NORMAL);
-
-        sensorManager.getRotationMatrix(R, null,
-                valuesAcelerometro, valuesBrujula);
-        sensorManager.getOrientation(R, values);
-
-
-        return Math.toDegrees(values[0]);
-    }
-
-    class ListenerSensor implements SensorEventListener {
-
-        public void onSensorChanged(SensorEvent sensorEvent) {
-            if (valuesAcelerometro[0] < 1)
-                valuesAcelerometro = sensorEvent.values;
-            else if (valuesBrujula[0] < 1)
-                valuesBrujula = sensorEvent.values;
-
-        }
-
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-            // La precisión del sensor ha cambiado
-        }
-    }
 
     private LatLng locationVIN(String VIN) {
         DB db = new DB();

@@ -89,6 +89,12 @@
 
         </activity>
 
+        <activity
+            android:name=".TrackingActivity"
+            android:label="@string/Tracking_title">
+
+        </activity>
+
     </application>
 
 </manifest>

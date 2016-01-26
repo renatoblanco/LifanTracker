@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
+import uy.com.lifan.lifantracker.Util.Util;
 
 public class DetailInfoActivity extends FragmentActivity {
 
@@ -29,6 +31,8 @@ public class DetailInfoActivity extends FragmentActivity {
 
         ImageButton mapButton = (ImageButton) findViewById(R.id.btn_map);
         LinearLayout pantalla = (LinearLayout) findViewById(R.id.map_container);
+
+        ImageView tracking = (ImageView) findViewById(R.id.tracking);
 
         FrameLayout rootContariner = (FrameLayout) findViewById(R.id.root_container);
 
@@ -53,6 +57,15 @@ public class DetailInfoActivity extends FragmentActivity {
             }
         });
 
+        tracking.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent().setClass(
+                        DetailInfoActivity.this, TrackingActivity.class);
+                intent.putExtra("param_VIN", getIntent().getStringExtra(VIN));
+                startActivity(intent);
+            }
+        });
+
         String VIN = getIntent().getStringExtra(this.VIN);
 
         Car esteAuto = datosAuto(VIN);
@@ -63,22 +76,27 @@ public class DetailInfoActivity extends FragmentActivity {
         TextView engine = (TextView) findViewById(R.id.engine);
         engine.setText(esteAuto.engine);
 
-        TextView modelo = (TextView) findViewById(R.id.modelo);
-        modelo.setText(esteAuto.modelo);
-
         TextView color = (TextView) findViewById(R.id.color);
         color.setText(esteAuto.color);
 
         TextView proceso = (TextView) findViewById(R.id.proceso);
         proceso.setText(esteAuto.proceso);
 
+
         TextView fechaprod = (TextView) findViewById(R.id.fechaprod);
-        fechaprod.setText(esteAuto.fechaFab);
+        fechaprod.setText(Util.getAnioVIN(VIN));
 
         TextView lote = (TextView) findViewById(R.id.txt_lote);
         lote.setText(esteAuto.lote);
+
         TextView key = (TextView) findViewById(R.id.txt_key);
         key.setText(esteAuto.lifan_keycode);
+
+        TextView factura = (TextView) findViewById(R.id.txt_factura);
+        factura.setText(esteAuto.invoice);
+
+        TextView txt_numeroprod = (TextView) findViewById(R.id.txrt_nroprod);
+        txt_numeroprod.setText(esteAuto.numeroProd.toString());
 
 
     }

@@ -14,11 +14,14 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="180dp"
             android:layout_gravity="bottom"
-            android:src="@drawable/x60_landscape"
-            android:contextClickable="true" />
+            android:adjustViewBounds="true"
+            android:contextClickable="true"
+            android:cropToPadding="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/x60_landscape" />
 
 
         <LinearLayout
@@ -64,7 +67,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/modelo"
+                android:id="@+id/txt_factura"
                 android:layout_width="253dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
@@ -81,6 +84,7 @@
                 android:id="@+id/color"
                 android:layout_width="253dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="3dp"
                 android:elegantTextHeight="true"
                 android:hint="No disponible"
                 android:singleLine="true"
@@ -88,8 +92,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#4e4646"
                 android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginTop="3dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/proceso"
@@ -109,6 +112,7 @@
                 android:id="@+id/fechaprod"
                 android:layout_width="253dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="6dp"
                 android:elegantTextHeight="true"
                 android:hint="No disponible"
                 android:shadowColor="#c7b7b7"
@@ -118,13 +122,13 @@
                 android:textColor="#4e4646"
                 android:textSize="18dp"
                 android:textStyle="bold|normal"
-                android:theme="@style/Base.TextAppearance.AppCompat"
-                android:layout_marginTop="6dp" />
+                android:theme="@style/Base.TextAppearance.AppCompat" />
 
             <TextView
                 android:id="@+id/txt_lote"
                 android:layout_width="253dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="2dp"
                 android:elegantTextHeight="true"
                 android:hint="No disponible"
                 android:shadowColor="#c7b7b7"
@@ -134,13 +138,13 @@
                 android:textColor="#4e4646"
                 android:textSize="18dp"
                 android:textStyle="bold|normal"
-                android:theme="@style/Base.TextAppearance.AppCompat"
-                android:layout_marginTop="2dp" />
+                android:theme="@style/Base.TextAppearance.AppCompat" />
 
             <TextView
                 android:id="@+id/txt_key"
                 android:layout_width="253dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="4dp"
                 android:elegantTextHeight="true"
                 android:hint="No disponible"
                 android:shadowColor="#c7b7b7"
@@ -150,8 +154,7 @@
                 android:textColor="#4e4646"
                 android:textSize="18dp"
                 android:textStyle="bold|normal"
-                android:theme="@style/Base.TextAppearance.AppCompat"
-                android:layout_marginTop="2dp" />
+                android:theme="@style/Base.TextAppearance.AppCompat" />
 
 
         </LinearLayout>
@@ -161,27 +164,48 @@
 
     <LinearLayout
         android:layout_width="109dp"
-        android:layout_height="458dp"
+        android:layout_height="200dp"
         android:layout_gravity="right"
         android:layout_weight="300"
         android:orientation="horizontal"
         android:weightSum="1">
 
 
-        <ImageButton
-            android:id="@+id/detail"
-            android:layout_width="100dp"
-            android:layout_height="208dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:adjustViewBounds="false"
-            android:src="@drawable/number"
-            android:visibility="visible"
-            android:paddingLeft="10dp"
-            android:tintMode="src_in"
-            android:background="@android:color/background_light" />
+        <TextView
+            android:id="@+id/txrt_nroprod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="145dp"
+            android:text="N°"
+            android:shadowColor="#8a6603"
+            android:shadowDx="3"
+            android:shadowDy="2"
+            android:shadowRadius="1.8"
+            android:textColor="@color/colorAccent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="109dp"
+        android:layout_height="152dp"
+        android:layout_gravity="bottom|right"
+        android:layout_weight="300"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/tracking"
+            android:src="@drawable/ic_tracking"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            android:onClick="@string/abc_search_hint" />
     </LinearLayout>
 
     <LinearLayout
@@ -205,7 +229,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             android:text="Motor"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="18dp" />
@@ -215,7 +239,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             android:autoText="false"
             android:text="Factura"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -226,7 +250,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             android:autoText="false"
             android:text="Color"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -237,7 +261,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             android:autoText="false"
             android:text="Proceso"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -248,7 +272,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             android:autoText="false"
             android:text="Año"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -259,7 +283,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             android:autoText="false"
             android:text="Lote"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -270,7 +294,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             android:autoText="false"
             android:text="Llave"
             android:textAppearance="?android:attr/textAppearanceMedium"
