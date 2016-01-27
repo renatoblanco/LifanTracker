@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import uy.com.lifan.lifantracker.DB.DB;
 import uy.com.lifan.lifantracker.DB.Querys;
@@ -107,7 +108,7 @@ public class TrackingActivity extends FragmentActivity implements LocationListen
         mMap.getUiSettings().setCompassEnabled(true);
 
         LatLng locatorLatLong = new LatLng(-34.707616, -56.503064);
-        Marker marker;
+
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(locatorLatLong)      // Sets the center of the map to Lifan
                 .zoom(17)                   // Sets the zoom
@@ -122,6 +123,8 @@ public class TrackingActivity extends FragmentActivity implements LocationListen
         Integer countCars = 0;
 
         DB db = new DB();
+
+        ArrayList<Marker> markers = new ArrayList<Marker>();
         try {
             ResultSet resultSet;
 
@@ -134,10 +137,15 @@ public class TrackingActivity extends FragmentActivity implements LocationListen
                 while (resultSet.next()) {
                     countCars++;
                     locatorLatLong = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
-                    mMap.addMarker(new MarkerOptions()
+
+                    Marker mark = mMap.addMarker(new MarkerOptions()
                             .position(locatorLatLong).flat(true).rotation(210)
                             .title(countCars.toString())
-                            .snippet(resultSet.getString("created").substring(0, 19)).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3))).setFlat(true);
+                            .snippet(resultSet.getString("created").substring(0, 19)).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3)));
+
+                    mark.showInfoWindow();
+                    markers.add(mark);
+
                     //  marker.setRotation(210);
 
 
@@ -146,7 +154,9 @@ public class TrackingActivity extends FragmentActivity implements LocationListen
         } catch (Exception ex) {
 
         }
-        Toast toast = Toast.makeText(getApplicationContext(), countCars + " posición encontrada", Toast.LENGTH_LONG);
+
+
+        Toast toast = Toast.makeText(getApplicationContext(), countCars + " posiciónes encontrada", Toast.LENGTH_LONG);
         toast.show();
 
     }
