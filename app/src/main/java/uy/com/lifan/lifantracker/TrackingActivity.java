@@ -1,6 +1,7 @@
 package uy.com.lifan.lifantracker;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +16,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ public class TrackingActivity extends FragmentActivity implements LocationListen
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     public static final String param_VIN = "param_VIN";
     private String VIN;
+    public static final PolylineOptions POLILINEA = new PolylineOptions();
 
 
     @Override
@@ -57,6 +61,8 @@ public class TrackingActivity extends FragmentActivity implements LocationListen
             }
 
         });
+
+
     }
 
     @Override
@@ -134,9 +140,11 @@ public class TrackingActivity extends FragmentActivity implements LocationListen
 
             if (resultSet != null) {
 
+
                 while (resultSet.next()) {
                     countCars++;
                     locatorLatLong = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
+                    POLILINEA.add(locatorLatLong);
 
                     Marker mark = mMap.addMarker(new MarkerOptions()
                             .position(locatorLatLong).flat(true).rotation(210)
@@ -155,7 +163,7 @@ public class TrackingActivity extends FragmentActivity implements LocationListen
 
         }
 
-
+        Polyline polyline = mMap.addPolyline(POLILINEA.color(Color.BLUE));
         Toast toast = Toast.makeText(getApplicationContext(), countCars + " posiciónes encontrada", Toast.LENGTH_LONG);
         toast.show();
 

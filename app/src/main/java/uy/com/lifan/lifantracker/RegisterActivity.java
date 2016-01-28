@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +54,7 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
 
 
-        ImageButton detailButton = (ImageButton) findViewById(R.id.detail);
+        ImageView detailButton = (ImageView) findViewById(R.id.detail);
 
 
         ImageButton mapButton = (ImageButton) findViewById(R.id.btn_map);
