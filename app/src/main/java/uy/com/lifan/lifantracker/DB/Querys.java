@@ -25,4 +25,7 @@ public class Querys {
     public static final String QRY_ADVANCED_SEARCH_PROCESO = " and pp.z_vin in (select vin from effa_li li, effa_li_linea lil where lil.effa_li_id=li.effa_li_id and proceso  ilike '%%%s%%' and vin is not null) ";
     public static final String QRY_ADVANCED_SEARCH_DESDE = " and z_enddate::date >='%s'";
     public static final String QRY_ADVANCED_SEARCH_HASTA = " and z_enddate::date <='%s'";
+    public static final String QRY_INVENTORY_STOCK = "  SELECT count(*) FROM m_storage s, m_attributesetinstance att , m_product p WHERE s.qtyonhand > 0::numeric AND att.m_attributesetinstance_id = s.m_attributesetinstance_id AND att.isactive = 'Y'::bpchar   and s.m_product_id=p.m_product_id and M_Product_Category_ID=2100017";
+    public static final String QRY_LOCATIONS_COUNT = "SELECT count(*) FROM android.lifan_android_locations loc where  loc.islast='Y' ";
+
 }

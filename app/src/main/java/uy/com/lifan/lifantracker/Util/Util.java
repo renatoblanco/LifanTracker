@@ -1,8 +1,16 @@
 package uy.com.lifan.lifantracker.Util;
 
+import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
-public class Util {
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class Util extends Activity {
     /**
      * Check if a VIN Number is Valid
      * Based on VIN.java class at:
@@ -115,5 +123,61 @@ public class Util {
 
     }
 
+    public int is_conected() {
 
+        int conected = 0;
+
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected()) {
+
+            URL url = null;
+            try {
+                url = new URL("http://192.168.2.2:8080/admin");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                conected = 1;
+            }
+            HttpURLConnection connection = null;
+            try {
+                connection = (HttpURLConnection)
+                        url.openConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+                conected = 1;
+            }
+            connection.setRequestProperty("User-Agent", "yourAgent");
+            connection.setRequestProperty("Connection", "close");
+            connection.setConnectTimeout(1000);
+
+            try {
+                connection.connect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (connection.getResponseCode() == 200) {
+                    conected = 0;
+                } else {
+                    conected = 1;
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                conected = 1;
+            }
+
+
+        } else {
+
+            conected = 2;
+
+        }
+        return conected;
+
+    }
 }

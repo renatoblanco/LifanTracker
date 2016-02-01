@@ -46,6 +46,18 @@ public class DetailInfoActivity extends FragmentActivity {
             }
         });
 
+
+        ImageButton optionsButton = (ImageButton) findViewById(R.id.btn_others);
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailInfoActivity.this, OptionsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
         ImageButton searchButton = (ImageButton) findViewById(R.id.btn_search);
 
         searchButton.setOnClickListener(new View.OnClickListener() {

@@ -97,6 +97,16 @@ public class RegisterActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
 
+        ImageButton optionsButton = (ImageButton) findViewById(R.id.btn_others);
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, OptionsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 

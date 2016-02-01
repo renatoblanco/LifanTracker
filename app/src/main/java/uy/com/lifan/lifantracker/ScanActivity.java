@@ -1,11 +1,14 @@
 package uy.com.lifan.lifantracker;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -118,12 +121,13 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                gpsEnable();
                 Intent intent = new Intent(ScanActivity.this, BarcodeCaptureActivity.class);
                 intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
                 intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
                 errorLocation = false;
                 startActivityForResult(intent, RC_BARCODE_CAPTURE);
+                gpsEnable();
 
             }
         });
@@ -145,6 +149,17 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ScanActivity.this, SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+        ImageButton optionsButton = (ImageButton) findViewById(R.id.btn_others);
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ScanActivity.this, OptionsActivity.class);
                 startActivity(intent);
 
             }
@@ -235,20 +250,48 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
 
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        //  locationManager.removeUpdates(locationlistener);
+    protected void onPause() {
+        super.onPause();
+        //  gpsDisable();
     }
+
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
+        gpsEnable();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
+        gpsEnable();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getDelegate().onDestroy();
+        gpsDisable();
+    }
+
+    private void gpsEnable() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationlistener);
+    }
+
+    private void gpsDisable() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        }
+        locationManager.removeUpdates(locationlistener);
     }
 }

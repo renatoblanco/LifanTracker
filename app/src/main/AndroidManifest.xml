@@ -11,6 +11,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -43,6 +44,13 @@
         <activity
             android:name=".SplashScreenActivity"
             android:label="@string/app_name">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
         </activity>
 
         <meta-data
@@ -63,10 +71,6 @@
             android:label="Read Barcode" />
 
         <activity android:name=".ScanActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -76,13 +80,10 @@
 
         <activity
             android:name=".NoConectionScreenActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".AdvancedSearchActivity"
-            android:label="@string/searchAdvancedActivity_title">
-
-        </activity>
+            android:label="@string/searchAdvancedActivity_title"></activity>
         <activity
             android:name=".DetailInfoActivity"
             android:label="@string/DetailInfoActivity_title">
@@ -91,9 +92,15 @@
 
         <activity
             android:name=".TrackingActivity"
-            android:label="@string/Tracking_title">
+            android:label="@string/Tracking_title"></activity>
 
-        </activity>
+        <activity
+            android:name=".OptionsActivity"
+            android:label="@string/options_title"></activity>
+
+        <activity
+            android:name=".StatiticsActivity"
+            android:label="@string/options_title"></activity>
 
     </application>
 

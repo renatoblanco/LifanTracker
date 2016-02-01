@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/options_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="uy.com.lifan.lifantracker.ScanActivity">
+
+        <LinearLayout
+            android:id="@+id/form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/btn_statistics"
+                android:layout_width="match_parent"
+                android:layout_height="99dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/search_form"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="60dp"
+                android:layout_weight="0.20"
+                android:color="#e1ff4000"
+                android:enabled="false"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:foregroundTint="#be7272"
+                android:radius="32dp"
+                android:shape="rectangle"
+                android:src="@drawable/ic_statistics"
+                android:text="Estadísticas" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.20"
+                android:text="Estadísticas"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="99dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/search_form"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="60dp"
+                android:layout_weight="0.20"
+                android:color="#e1ff4000"
+                android:enabled="false"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:foregroundTint="#be7272"
+                android:radius="32dp"
+                android:shape="rectangle"
+                android:src="@drawable/ic_info_options"
+                android:text="Estadísticas" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.20"
+                android:text="Información"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/inc_toolbar"
+        layout="@layout/toolbar"></include>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -51,6 +51,7 @@
     <string name="more_options_marker_message">Persione por mas detalles</string>
     <string name="DetailInfoActivity_title">Informacion Detallada</string>
     <string name="Tracking_title">Ubicaciones Anteriores</string>
+    <string name="options_title">Avanzado</string>
     <string name="exception_message">Ha ocurrido un error, consulte con Sistemas.</string>
 
     <string-array name="models_arrays">

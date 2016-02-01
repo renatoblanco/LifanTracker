@@ -137,6 +137,17 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
+        ImageButton optionsButton = (ImageButton) findViewById(R.id.btn_others);
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchActivity.this, OptionsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 
     @Override
