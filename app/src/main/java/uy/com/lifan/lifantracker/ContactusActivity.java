@@ -12,17 +12,17 @@ import android.widget.ImageView;
  * Created by renat on 31/01/2016.
  */
 
-public class OptionsActivity extends Activity {
-
+public class ContactusActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         // Set portrait orientation
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        setContentView(R.layout.activity_options);
+        setContentView(R.layout.activity_contactus);
 
         setTitle(R.string.options_title);
 
@@ -30,32 +30,11 @@ public class OptionsActivity extends Activity {
         ImageView optionsButton = (ImageView) findViewById(R.id.btn_others);
         ImageButton searchButton = (ImageButton) findViewById(R.id.btn_search);
 
-        ImageView statitics = (ImageView) findViewById(R.id.btn_statistics);
-
-        ImageView contactus = (ImageView) findViewById(R.id.btn_contactus);
-
-
-        statitics.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent().setClass(
-                        OptionsActivity.this, StatiticsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        contactus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent().setClass(
-                        OptionsActivity.this, ContactusActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OptionsActivity.this, MapsActivity.class);
+                Intent intent = new Intent(ContactusActivity.this, MapsActivity.class);
                 startActivity(intent);
 
             }
@@ -64,7 +43,7 @@ public class OptionsActivity extends Activity {
         optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OptionsActivity.this, OptionsActivity.class);
+                Intent intent = new Intent(ContactusActivity.this, ContactusActivity.class);
                 startActivity(intent);
 
             }
@@ -73,7 +52,7 @@ public class OptionsActivity extends Activity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OptionsActivity.this, SearchActivity.class);
+                Intent intent = new Intent(ContactusActivity.this, SearchActivity.class);
                 startActivity(intent);
 
             }

@@ -59,7 +59,7 @@
                 android:textSize="18dp" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/btn_contactus"
                 android:layout_width="match_parent"
                 android:layout_height="99dp"
                 android:layout_alignParentLeft="true"

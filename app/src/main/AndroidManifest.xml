@@ -102,6 +102,10 @@
             android:name=".StatiticsActivity"
             android:label="@string/options_title"></activity>
 
+        <activity
+            android:name=".ContactusActivity"
+            android:label="@string/contactus_title"></activity>
+
     </application>
 
 </manifest>
