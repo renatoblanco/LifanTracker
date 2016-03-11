@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.maps.model.LatLng;
@@ -164,6 +165,10 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
 
             }
         });
+
+        Toast toast = Toast.makeText(getApplicationContext(), "Bienvenido " + Global.getInstance().getUser(), Toast.LENGTH_LONG);
+        toast.show();
+
 
     }
 

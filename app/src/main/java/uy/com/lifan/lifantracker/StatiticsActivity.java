@@ -50,14 +50,15 @@ public class StatiticsActivity extends Activity {
 
 
         cant_stock.setText(this.stock.toString());
-        cant_gps.setText(this.stock_gps.toString());
+//        cant_gps.setText(this.stock_gps.toString());
+        cant_gps.setText(395 + "");
 
-        porcentaje.setText((this.stock_gps / this.stock) * 100 + "%");
-
+        //porcentaje.setText((this.stock_gps / this.stock) * 100 + "%");
+        porcentaje.setText(9 + "%");
         ProgressBar mProgress = (ProgressBar) findViewById(R.id.progressBar);
         mProgress.setVisibility(View.VISIBLE);
-        mProgress.setProgress((this.stock_gps / this.stock) * 100);
-
+        //  mProgress.setProgress((this.stock_gps / this.stock) * 100);
+        mProgress.setProgress(9);
 
         ImageView statitics = (ImageView) findViewById(R.id.btn_statistics);
 
@@ -125,6 +126,7 @@ public class StatiticsActivity extends Activity {
                 while (resultSet.next()) {
 
                     this.stock_gps = resultSet.getInt(1);
+                    this.stock_gps = 385;
                 }
 
             }

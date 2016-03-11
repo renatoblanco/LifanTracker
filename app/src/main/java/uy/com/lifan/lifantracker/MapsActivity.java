@@ -143,19 +143,46 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
             if (resultSet != null) {
                 while (resultSet.next()) {
                     locatorLatLong = new LatLng(resultSet.getFloat("latitud"), resultSet.getFloat("longitud"));
+                    String color = resultSet.getString("color");
+
+                    int colorNro = R.drawable.car_icon_grey;
+
+                    if (color.compareTo("Blue") == 0)
+                        colorNro = R.drawable.car_icon_blue;
+                    else if (color.contains("White"))
+                        colorNro = R.drawable.car_icon_white;
+                    else if (color.compareTo("Red") == 0)
+                        colorNro = R.drawable.car_icon_red;
+                    else if (color.compareTo("Green") == 0)
+                        colorNro = R.drawable.car_icon_green;
+                    else if (color.contains("Yellow"))
+                        colorNro = R.drawable.car_icon_yellow;
+                    else if (color.contains("Black"))
+                        colorNro = R.drawable.car_icon_black;
+                    else if (color.contains("Silver"))
+                        colorNro = R.drawable.car_icon_silver;
+                    else if (color.contains("Purple"))
+                        colorNro = R.drawable.car_icon_purple;
+
+
+
                     mMap.addMarker(new MarkerOptions()
                             .position(locatorLatLong).flat(true).rotation(210)
                             .title(resultSet.getString("vin"))
-                            .snippet(getString(R.string.more_options_marker_message)).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car_icon3))).setFlat(true);
+                            .snippet(getString(R.string.more_options_marker_message)).position(locatorLatLong).flat(true).icon(BitmapDescriptorFactory.fromResource(colorNro))).setFlat(true);
+
+
                     //  marker.setRotation(210);
                     countCars++;
                 }
+
             }
         } catch (Exception ex) {
 
         }
-        Toast toast = Toast.makeText(getApplicationContext(), countCars + " autos encontrados", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), countCars + " autos encontrados", Toast.LENGTH_LONG);
         toast.show();
+
 
     }
 

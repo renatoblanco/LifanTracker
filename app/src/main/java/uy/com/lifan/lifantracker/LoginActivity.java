@@ -300,6 +300,8 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
+
+
                 Intent intent =
                         new Intent(LoginActivity.this, ScanActivity.class);
                 startActivity(intent);

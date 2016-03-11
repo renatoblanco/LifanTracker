@@ -10,7 +10,7 @@ public class Querys {
 
     public static final String QRY_USUARIOS_ACTIVOS = "SELECT name FROM adempiere.ad_user where ad_client_id = 2100001 and isactive= 'Y' and order by 1 ";
     public static final String QRY_USUARIO = "SELECT Smartphone_pin FROM adempiere.ad_user where ad_client_id = 2100001 and isactive= 'Y' and name = '%s' ";
-    public static final String QRY_LOCATIONS = "SELECT * FROM android.lifan_android_locations loc where  loc.islast='Y' ";
+    public static final String QRY_LOCATIONS = "SELECT loc.*,color FROM android.lifan_android_locations loc , m_productionplan pp where  loc.islast='Y' and loc.vin =pp.z_vin ";
     public static final String QRY_LOCATIONS_VIN = "SELECT * FROM android.lifan_android_locations loc  where vin = '%s' and loc.islast='Y' ";
     public static final String QRY_TRACKING_VIN = "SELECT * FROM android.lifan_android_locations loc  where vin = '%s' ORDER BY CREATED ";
     public static final String QRY_DATOS_VIN = "select  line,z_enddate::date,z_shipment,(select value from m_product where m_product_id= pp.m_product_id)as modelo,z_vin,z_engine,z_ecuengine,z_startdate, z_enddate, lifan_keycode,color,(select proceso from effa_li where effa_li_id =(select effa_li_id from effa_li_linea where vin = trim('%s')) ) as proceso,(select invoiceci from effa_li where effa_li_id =(select effa_li_id from effa_li_linea where vin = trim('%s')) ) as invoice from m_productionplan pp where isactive='Y' and z_vin = trim( '%s')";
